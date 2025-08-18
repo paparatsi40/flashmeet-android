@@ -1,0 +1,136 @@
+[versions]
+# Eliminamos firebaseStorageKtx de versions, ya que su versión será gestionada por el BoM
+# accompanistSwiperefresh = "<latest_version>" # Si tienes una versión específica, déjala. Si no, quítala.
+activityKtx = "1.10.1" # Esta versión parece un poco antigua para Compose, pero la mantengo si la necesitas.
+androidxMaterialIconsExtended = "1.0"
+coilCompose = "2.6.0"
+credentials = "1.5.0"
+financialConnections = "21.18.0"
+kotlin = "2.1.21" # Actualizado a una versión más reciente y compatible con Compose Compiler 1.5.x
+composeCompiler = "2.1.21" # Actualizado para ser compatible con Kotlin 1.9.22 y Compose BoM 2024.06.00 o similar
+accompanistPermissions = "0.34.0"
+cameraCore = "1.4.2"
+datastorePreferences = "1.1.7"
+firebaseBom = "33.15.0" # Tu versión actual del BoM
+coreKtx = "1.16.0"
+junit = "4.13.2"
+junitVersion = "1.2.1"
+espressoCore = "3.6.1"
+kotlinxCoroutinesCore = "1.7.3"
+lifecycleRuntimeKtx = "2.9.1"
+activityCompose = "1.10.1"
+composeBom = "2024.06.00" # Recomiendo usar una versión más reciente del BoM de Compose para compatibilidad
+compose = "1.6.0" # Ajustado para la nueva versión del BoM de Compose
+google-fonts = "1.2.0" # Ajustado a una versión más reciente
+lifecycleViewmodelCompose = "2.9.1"
+mapsCompose = "2.15.0"
+mapsComposeVersion = "4.3.3"
+material3 = "1.3.2"
+hilt = "2.56.2"
+materialIconsExtended = "2.6.0"
+navigation = "2.7.7" # Asegúrate de que esta versión sea compatible con tu Compose BoM
+paymentsheet = "21.18.0"
+paymentsUiCore = "21.21.0"
+playServicesAuthVersion = "21.3.0"
+playServicesLocation = "21.3.0"
+playServicesMaps = "19.2.0"
+playServicesMapsVersion = "18.2.0"
+retrofit = "2.9.0"
+moshi = "1.15.0"
+okhttp = "4.12.0" # Versión estable más reciente, 5.x.x son alpha
+gson = "2.11.0"
+converter-gson = "2.9.0"
+roomRuntime = "2.7.2"
+googleid = "1.1.1"
+stripeAndroid = "21.18.0"
+firebaseAppcheckPlayintegrity = "18.0.0"
+runtime = "1.0.0-alpha04" # Esta versión es muy antigua, revisa si hay una más reciente
+media3CommonKtx = "1.7.1"
+places = "4.4.1"
+firebaseMessagingKtx = "25.0.0"
+stripeAndroidVersion = "21.21.0"
+
+[libraries]
+accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
+# Si tienes una versión específica para accompanistSwiperefresh, déjala. Si no, quítala.
+# accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanistSwiperefresh" }
+androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activityKtx" }
+androidx-camera-core = { module = "androidx.camera:camera-core", version.ref = "cameraCore" }
+androidx-camera-extensions = { module = "androidx.camera:camera-extensions", version.ref = "cameraCore" }
+androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "cameraCore" }
+androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "cameraCore" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-credentials = { module = "androidx.credentials:credentials", version.ref = "credentials" }
+androidx-credentials-play-services-auth = { module = "androidx.credentials:credentials-play-services-auth", version.ref = "credentials" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
+androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
+# Material Icons Extended: Solo necesitas una entrada y se puede gestionar por el BoM de Compose
+androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
+# Eliminamos androidx-material-icons-extended-v10, ya que es duplicado
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
+camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "cameraCore" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" } # Usamos esta como la principal para Coil
+# Eliminamos coil-compose-v260 para evitar duplicados
+financial-connections = { module = "com.stripe:financial-connections", version.ref = "financialConnections" }
+
+# 👇👇👇 CAMBIOS CLAVE PARA FIREBASE 👇👇👇
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" } # Bien, usa el BoM
+firebase-appcheck-playintegrity = { module = "com.google.firebase:firebase-appcheck-playintegrity" } # Bien, usa el BoM
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" } # Bien
+# Ya no necesitamos especificar el sufijo -ktx aquí, el BoM se encarga y el módulo principal incluye las extensiones KTX
+firebase-auth = { module = "com.google.firebase:firebase-auth" }
+firebase-firestore = { module = "com.google.firebase:firebase-firestore" }
+firebase-storage = { module = "com.google.firebase:firebase-storage" }
+# Eliminamos las entradas duplicadas y con sufijo -ktx
+# google-firebase-firestore-ktx = { module = "com.google.firebase:firebase-firestore-ktx" }
+# google-firebase-storage-ktx = { module = "com.google.firebase:firebase-storage-ktx" }
+# 👆👆👆 FIN CAMBIOS CLAVE PARA FIREBASE 👆👆👆
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+androidx-ui = { group = "androidx.compose.ui", name = "ui", version.ref = "compose" }
+androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics", version.ref = "compose" }
+androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "compose" }
+androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "compose" }
+androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version.ref = "compose" }
+androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "compose" }
+androidx-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
+# Maps Compose: Solo una entrada, si no usas maps-compose-v2114, elimínala
+maps-compose-v2150 = { module = "com.google.maps.android:maps-compose", version.ref = "mapsCompose" }
+# material-icons-extended: Ya lo gestiona la primera entrada (androidx-material-icons-extended)
+# material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
+navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
+hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version = "1.2.0" }
+moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
+converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
+payments-ui-core = { module = "com.stripe:payments-ui-core", version.ref = "paymentsUiCore" }
+paymentsheet = { module = "com.stripe:paymentsheet", version.ref = "paymentsheet" }
+play-services-auth-v2100 = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuthVersion" }
+play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
+play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMaps" }
+# play-services-maps-v1820: Es un duplicado si usas play-services-maps
+# play-services-maps-v1820 = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMapsVersion" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "converter-gson" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+okhttp-logging = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
+androidx-compose-google-fonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts", version.ref = "google-fonts" }
+googleid = { group = "com.google.android.libraries.identity.googleid", name = "googleid", version.ref = "googleid" }
+stripe-android = { module = "com.stripe:stripe-android", version.ref = "stripeAndroid" }
+google-firebase-appcheck-playintegrity = { group = "com.google.firebase", name = "firebase-appcheck-playintegrity", version.ref = "firebaseAppcheckPlayintegrity" }
+androidx-runtime = { group = "androidx.xr.runtime", name = "runtime", version.ref = "runtime" }
+androidx-media3-common-ktx = { group = "androidx.media3", name = "media3-common-ktx", version.ref = "media3CommonKtx" }
+places = { group = "com.google.android.libraries.places", name = "places", version.ref = "places" }
+firebase-messaging-ktx = { group = "com.google.firebase", name = "firebase-messaging-ktx", version.ref = "firebaseMessagingKtx" }
+stripe-android-v21210 = { module = "com.stripe:stripe-android", version.ref = "stripeAndroidVersion" }
+
+[plugins]
+android-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

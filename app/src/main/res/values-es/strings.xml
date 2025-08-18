@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FlashMeet</string>
+    <string name="default_web_client_id">137342050430-vm30lpch8lvoai57mpmksnm8866orgck.apps.googleusercontent.com</string>
+    <string name="google_maps_key">AIzaSyBxrruyV3EqfPyhpf1C5tA7AmXtBbkp0PU</string>
+
+    <!-- Welcome Screen -->
+    <string name="welcome_title">¡Bienvenido a FlashMeet!</string>
+    <string name="welcome_subtitle">Descubre y crea eventos en tiempo real.</string>
+    <string name="start_button">Comenzar</string>
+    <string name="next_button">Siguiente</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_page_1_title">Encuentra eventos cerca de ti</string>
+    <string name="onboarding_page_1_desc">Explora el mapa y descubre reuniones cerca de tu ubicación.</string>
+    <string name="onboarding_page_2_title">Crea tus propios eventos</string>
+    <string name="onboarding_page_2_desc">Organiza encuentros y compártelos con otros en segundos.</string>
+    <string name="onboarding_page_3_title">Promociona y comparte</string>
+    <string name="onboarding_page_3_desc">Resalta tus eventos para llegar a más personas.</string>
+    <string name="onboarding_skip">Saltar</string>
+    <string name="onboarding_next">Siguiente</string>
+    <string name="onboarding_start">Comenzar</string>
+
+    <!-- Login Screen -->
+    <string name="login_title">Iniciar sesión</string>
+    <string name="email_hint">Correo electrónico</string>
+    <string name="password_hint">Contraseña</string>
+    <string name="login_button">Acceder</string>
+    <string name="register_prompt">¿No tienes cuenta? Crear una</string>
+    <string name="forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="google_signin">Continuar con Google</string>
+
+    <!-- Register Screen -->
+    <string name="register_title">Crear cuenta</string>
+    <string name="repeat_password_hint">Repetir contraseña</string>
+    <string name="passwords_do_not_match">Las contraseñas no coinciden</string>
+    <string name="password_length_error">La contraseña debe tener al menos 6 caracteres</string>
+    <string name="register_button">Crear cuenta</string>
+    <string name="already_have_account">¿Ya tienes cuenta? Iniciar sesión</string>
+
+    <!-- Validation messages -->
+    <string name="invalid_email">Correo inválido</string>
+    <string name="password_required">Contraseña obligatoria</string>
+
+    <string name="settings_title">Configuración</string>
+    <string name="language_selection">Selecciona el idioma</string>
+    <string name="home_title">FlashMeet 🧨</string>
+
+    <!-- Firebase Auth Error Messages -->
+    <string name="auth_error_weak_password">La contraseña es demasiado débil. Necesita al menos 6 caracteres y una combinación de letras, números y símbolos.</string>
+    <string name="auth_error_invalid_credentials">Credenciales inválidas. Verifica tu correo y contraseña.</string>
+    <string name="auth_error_user_not_found">Usuario no encontrado o deshabilitado.</string>
+    <string name="auth_error_email_in_use">Ya existe una cuenta con este correo electrónico.</string>
+    <string name="auth_error_google_token_null">No se pudo obtener el ID Token de Google.</string>
+    <string name="auth_error_google_canceled">El inicio de sesión con Google fue cancelado.</string>
+    <string name="auth_error_network">Error de red. Por favor, verifica tu conexión.</string>
+    <string name="auth_error_google_signin_failed">Error al iniciar sesión con Google: %1$s</string>
+    <string name="auth_error_unknown">Ocurrió un error desconocido. Por favor, inténtalo de nuevo.</string>
+
+    <!-- Password Strength Error Messages (for RegisterScreen) -->
+    <string name="password_uppercase_required">La contraseña necesita al menos una mayúscula.</string>
+    <string name="password_lowercase_required">La contraseña necesita al menos una minúscula.</string>
+    <string name="password_digit_required">La contraseña necesita al menos un número.</string>
+    <string name="password_special_char_required">La contraseña necesita al menos un carácter especial (ej. !@#$%^&amp;*).</string>
+
+    <!-- strings.xml -->
+    <string name="forgot_password_title">Olvidé mi Contraseña</string>
+    <string name="forgot_password_subtitle">Introduce tu correo electrónico para recibir un enlace de restablecimiento de contraseña.</string>
+    <string name="send_reset_email_button">Enviar Enlace de Restablecimiento</string>
+    <string name="back_to_login_button">Volver al Inicio de Sesión</string>
+    <string name="reset_email_success_message">Si existe una cuenta con ese correo electrónico, se ha enviado un enlace de restablecimiento de contraseña.</string>
+    <string name="auth_error_invalid_user">Estado de usuario inválido o cuenta deshabilitada.</string>
+    <string name="splash_title">FlashMeet</string>
+
+</resources>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FlashMeet</string>
+    <string name="default_web_client_id">137342050430-vm30lpch8lvoai57mpmksnm8866orgck.apps.googleusercontent.com</string>
+    <string name="google_maps_key">AIzaSyBxrruyV3EqfPyhpf1C5tA7AmXtBbkp0PU</string>
+
+    <!-- Welcome Screen -->
+    <string name="welcome_title">Welcome to FlashMeet!</string>
+    <string name="welcome_subtitle">Discover and create real-time events.</string>
+    <string name="start_button">Get Started</string>
+    <string name="next_button">Next</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_page_1_title">Find events near you</string>
+    <string name="onboarding_page_1_desc">Explore the map and discover meetups close to your location.</string>
+    <string name="onboarding_page_2_title">Create your own events</string>
+    <string name="onboarding_page_2_desc">Host meetups and share them with others in seconds.</string>
+    <string name="onboarding_page_3_title">Promote and share</string>
+    <string name="onboarding_page_3_desc">Boost your events to reach more people.</string>
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_start">Start</string>
+
+    <!-- Login Screen -->
+    <string name="login_title">Sign In</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="login_button">Sign In</string> <!-- CORRECTED: Was "Acceder", now "Sign In" -->
+    <string name="register_prompt">Don\'t have an account? Register</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="google_signin">Continue with Google</string>
+
+    <!-- Register Screen -->
+    <string name="register_title">Create Account</string>
+    <string name="repeat_password_hint">Repeat Password</string>
+    <string name="passwords_do_not_match">Passwords do not match</string>
+    <string name="password_length_error">Password must be at least 6 characters</string>
+    <string name="register_button">Register</string>
+    <string name="already_have_account">Already have an account? Sign in</string>
+
+    <!-- Validation messages -->
+    <string name="invalid_email">Invalid email</string>
+    <string name="password_required">Password is required</string>
+
+    <string name="settings_title">Settings</string>
+    <string name="language_selection">Select language</string>
+    <string name="home_title">FlashMeet 🧨</string>
+
+    <!-- Firebase Auth Error Messages -->
+    <string name="auth_error_weak_password">Password is too weak. It needs at least 6 characters and a combination of letters, numbers, and symbols.</string>
+    <string name="auth_error_invalid_credentials">Invalid credentials. Please check your email and password.</string>
+    <string name="auth_error_user_not_found">User not found or disabled.</string>
+    <string name="auth_error_email_in_use">An account with this email already exists.</string>
+    <string name="auth_error_google_token_null">Could not get Google ID Token.</string>
+    <string name="auth_error_google_canceled">Google Sign-In was cancelled.</string>
+    <string name="auth_error_network">Network error. Please check your connection.</string>
+    <string name="auth_error_google_signin_failed">Google Sign-In failed: %1$s</string> <!-- %1$s is for message from API -->
+    <string name="auth_error_unknown">An unknown error occurred. Please try again.</string>
+
+    <!-- Password Strength Error Messages (for RegisterScreen) -->
+    <string name="password_uppercase_required">Password needs at least one uppercase letter.</string>
+    <string name="password_lowercase_required">Password needs at least one lowercase letter.</string>
+    <string name="password_digit_required">Password needs at least one digit.</string>
+    <string name="password_special_char_required">Password needs at least one special character (e.g., !@#$%^&amp;*).</string>
+
+    <!-- strings.xml -->
+    <string name="forgot_password_title">Forgot Password</string>
+    <string name="forgot_password_subtitle">Enter your email to receive a password reset link.</string>
+    <string name="send_reset_email_button">Send Reset Email</string>
+    <string name="back_to_login_button">Back to Login</string>
+    <string name="reset_email_success_message">If an account exists for that email, a password reset link has been sent.</string>
+    <string name="auth_error_invalid_user">Invalid user status or account disabled.</string>
+    <string name="splash_title">FlashMeet</string>
+
+</resources>

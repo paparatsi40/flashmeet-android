@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "137342050430",
+    "project_id": "flashmeet-72bbf",
+    "storage_bucket": "flashmeet-72bbf.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:137342050430:android:d6ab71e5c7cb5616eab82f",
+        "android_client_info": {
+          "package_name": "com.carlitoswy.flashmeet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "137342050430-6vg6ejpq9soks2c7m3lpdv81uv18kgui.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.carlitoswy.flashmeet",
+            "certificate_hash": "65b725fbf92a9af76faf81b09b8422f1e1df8dd0"
+          }
+        },
+        {
+          "client_id": "137342050430-vm30lpch8lvoai57mpmksnm8866orgck.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbzvErTlg3pa4uwVy8OzZBHqU2kLenkn0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "137342050430-vm30lpch8lvoai57mpmksnm8866orgck.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
