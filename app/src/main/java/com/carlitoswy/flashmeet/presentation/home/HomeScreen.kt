@@ -21,6 +21,7 @@ import android.net.Uri
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.widget.Toast
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.animateFloatAsState
@@ -51,6 +52,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.automirrored.filled.Logout
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Favorite
@@ -63,13 +65,12 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconToggleButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SheetState
 import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -98,6 +99,7 @@ import androidx.compose.ui.zIndex
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.carlitoswy.flashmeet.R
+import com.carlitoswy.flashmeet.data.preferences.UserPreferences
 import com.carlitoswy.flashmeet.domain.model.Event
 import com.carlitoswy.flashmeet.presentation.components.EventCategoryFilterChips
 import com.carlitoswy.flashmeet.presentation.components.EventDetailBottomSheet
@@ -122,6 +124,7 @@ import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.MapEffect
 import com.google.maps.android.compose.MapProperties
 import com.google.maps.android.compose.MapUiSettings
+import com.google.maps.android.compose.MapsComposeExperimentalApi
 import com.google.maps.android.compose.rememberCameraPositionState
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -131,11 +134,11 @@ import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import kotlin.math.roundToInt
 
+@OptIn(MapsComposeExperimentalApi::class)
 @SuppressLint("MissingPermission")
 @Composable
 fun HomeScreen(
     navController: NavController,
-    // 👇 foco inicial opcional (deeplink o notificación)
     initialFocusId: String? = null,
     initialFocusLat: Double? = null,
     initialFocusLon: Double? = null,
@@ -146,6 +149,9 @@ fun HomeScreen(
     val userLocation by viewModel.userLocation.collectAsState()
     val selectedCategory by viewModel.selectedCategory.collectAsState()
     val isAlertActive by viewModel.eventAlert.collectAsState()
+    var showListView by remember { mutableStateOf(false) }
+    val userPrefs = remember { UserPreferences(context) }
+    val showListPref by userPrefs.showListFlow.collectAsState(initial = false)
 
     val cameraPositionState = rememberCameraPositionState()
     val scope = rememberCoroutineScope()
@@ -158,7 +164,7 @@ fun HomeScreen(
     var sortBy by remember { mutableStateOf(SortBy.DISTANCE) }
 
     // Sheets
-    var showListSheet by remember { mutableStateOf(false) }
+    var showListSheet by remember { mutableStateOf(showListPref) }
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = false)
     val detailSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
@@ -254,7 +260,6 @@ fun HomeScreen(
                     IconButton(onClick = { navController.navigate(Routes.SETTINGS) }) {
                         Icon(Icons.Filled.Settings, contentDescription = "Ajustes")
                     }
-                    // toggle persistente (DataStore + VM)
                     TextButton(onClick = { mapSettingsVM.toggleDarkMap() }) {
                         Text(if (darkMap) "Mapa claro" else "Mapa oscuro")
                     }
@@ -274,8 +279,26 @@ fun HomeScreen(
                         val (lat, lon) = userLocation ?: return@SmallFloatingActionButton
                         scope.launch { cameraPositionState.centerOnLocation(lat, lon) }
                     }
-                ) { Icon(Icons.Outlined.CenterFocusStrong, contentDescription = "Centrar mapa") }
+                ) {
+                    Icon(Icons.Outlined.CenterFocusStrong, contentDescription = "Centrar mapa")
+                }
+
                 Spacer(Modifier.height(12.dp))
+
+                // ✅ NUEVO: Botón para alternar entre Mapa y Lista
+                SmallFloatingActionButton(
+                    onClick = { showListView = !showListView }
+                ) {
+                    Icon(
+                        imageVector = if (showListView) Icons.Filled.Close else Icons.AutoMirrored.Filled.List,
+                        contentDescription = if (showListView) "Cerrar lista" else "Ver lista"
+                    )
+                }
+
+                Spacer(Modifier.height(12.dp))
+
+
+
                 RadarFab(
                     navController = navController,
                     expanded = fabExpanded,
@@ -284,6 +307,17 @@ fun HomeScreen(
                     cameraPositionState = cameraPositionState,
                     scope = scope
                 )
+
+
+                Spacer(Modifier.height(12.dp))
+
+
+                FloatingActionButton(
+                    onClick = { navController.navigate(Routes.MY_EVENTS) },
+                    modifier = Modifier.padding(top = 8.dp)
+                ) {
+                    Icon(Icons.AutoMirrored.Filled.List, contentDescription = "Mis eventos")
+                }
             }
         },
         floatingActionButtonPosition = FabPosition.End,
@@ -369,6 +403,94 @@ fun HomeScreen(
                     clusterManager.cluster()
                 }
             }
+
+            AnimatedVisibility(
+                visible = showListView,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.surface)
+                    .zIndex(6f)
+            ) {
+                Column(
+                    Modifier
+                        .fillMaxSize()
+                        .padding(top = 16.dp)
+                        .navigationBarsPadding()
+                ) {
+                    // 🔺 Header con botón cerrar
+                    Row(
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            "Eventos cerca",
+                            style = MaterialTheme.typography.titleLarge,
+                            modifier = Modifier.weight(1f)
+                        )
+                        IconButton(onClick = { showListView = false }) {
+                            Icon(Icons.Filled.Close, contentDescription = "Cerrar")
+                        }
+                    }
+
+                    // 🔽 Filtros y orden
+                    Row(
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        FilterChip(
+                            selected = showOnlyHighlightedEventsFilter,
+                            onClick = { showOnlyHighlightedEventsFilter = !showOnlyHighlightedEventsFilter },
+                            label = { Text("Solo destacados ⭐") }
+                        )
+                        Spacer(Modifier.width(12.dp))
+                        SegmentedButtons(sortBy = sortBy, onChangeSort = { sortBy = it })
+                    }
+
+                    Spacer(Modifier.height(8.dp))
+
+                    // 📜 Lista de eventos
+                    val sortedEvents = remember(events, sortBy, cameraPositionState.position.target) {
+                        val base = events.filter {
+                            if (showOnlyHighlightedEventsFilter) it.adOption == "HIGHLIGHTED" else true
+                        }
+                        sortEvents(base, cameraPositionState.position.target, sortBy)
+                    }
+
+                    LazyColumn(
+                        modifier = Modifier.fillMaxSize(),
+                        contentPadding = PaddingValues(bottom = 32.dp)
+                    ) {
+                        items(sortedEvents, key = { it.id.ifBlank { it.hashCode().toString() } }) { event ->
+
+                            val dist = distanceKm(
+                                cameraPositionState.position.target.latitude,
+                                cameraPositionState.position.target.longitude,
+                                event.latitude, event.longitude
+                            )
+
+                            val interested = event.id.isNotBlank() && interestedIds.contains(event.id)
+                            EventRowCard(
+                                event = event,
+                                distKm = dist,
+                                interested = interested,
+                                onToggleInterest = { scope.launch { interestsVM.toggleInterest(event.id) } },
+                                onClick = {
+                                    scope.launch {
+                                        cameraPositionState.centerOnLocation(event.latitude, event.longitude, zoom = 15f)
+                                        showListView = false
+                                        selectedEvent = event
+                                    }
+                                }
+                            )
+                        }
+                    }
+                }
+            }
+
 
             // scrim superior para legibilidad
             Box(
@@ -485,43 +607,11 @@ fun HomeScreen(
                         .align(Alignment.BottomCenter)
                         .padding(bottom = 90.dp)
                         .zIndex(3f),
-                    onClick = { showListSheet = true }
-                )
-            }
-
-            // ---------- BottomSheet lista ----------
-            if (showListSheet) {
-                val center = cameraPositionState.position.target
-                val baseList = listFromCluster ?: events
-                val sorted = remember(baseList, sortBy, center) {
-                    when (sortBy) {
-                        SortBy.DISTANCE -> baseList.sortedBy {
-                            distanceKm(center.latitude, center.longitude, it.latitude, it.longitude)
-                        }
-                        SortBy.NAME -> baseList.sortedBy { it.title.lowercase() }
-                        SortBy.DATE_DESC -> baseList.sortedByDescending { it.timestamp }
-                        SortBy.DATE_ASC -> baseList.sortedBy { it.timestamp }
+                    onClick = {
+                        showListSheet = true
+                        scope.launch { userPrefs.setShowListScreen(true) }
                     }
-                }
 
-                EventListSheet(
-                    sheetState = sheetState,
-                    events = sorted,
-                    cameraCenter = center,
-                    showOnlyHighlighted = showOnlyHighlightedEventsFilter,
-                    onToggleHighlighted = { showOnlyHighlightedEventsFilter = it },
-                    sortBy = sortBy,
-                    onChangeSort = { sortBy = it },
-                    interestedIds = interestedIds,
-                    onToggleInterest = { id -> scope.launch { interestsVM.toggleInterest(id) } },
-                    onSelect = { e ->
-                        scope.launch { cameraPositionState.centerOnLocation(e.latitude, e.longitude, zoom = 15f) }
-                        selectedEvent = e
-                    },
-                    onDismiss = {
-                        showListSheet = false
-                        listFromCluster = null
-                    }
                 )
             }
 
@@ -702,76 +792,14 @@ private fun createClusterBitmap(
     return bmp
 }
 
-/* ------------------- BOTTOM SHEET LISTA ------------------- */
-
-private enum class SortBy { DISTANCE, NAME, DATE_DESC, DATE_ASC }
-
-@Composable
-private fun EventListSheet(
-    sheetState: SheetState,
-    events: List<Event>,
-    cameraCenter: LatLng,
-    showOnlyHighlighted: Boolean,
-    onToggleHighlighted: (Boolean) -> Unit,
-    sortBy: SortBy,
-    onChangeSort: (SortBy) -> Unit,
-    interestedIds: Set<String>,
-    onToggleInterest: (String) -> Unit,
-    onSelect: (Event) -> Unit,
-    onDismiss: () -> Unit
-) {
-    ModalBottomSheet(
-        onDismissRequest = onDismiss,
-        sheetState = sheetState,
-        dragHandle = { androidx.compose.material3.BottomSheetDefaults.DragHandle() },
-        tonalElevation = 6.dp
-    ) {
-        Column(
-            Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 8.dp)
-        ) {
-            Text("Eventos cerca", style = MaterialTheme.typography.titleLarge)
-            Spacer(Modifier.height(8.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                FilterChip(
-                    selected = showOnlyHighlighted,
-                    onClick = { onToggleHighlighted(!showOnlyHighlighted) },
-                    label = { Text("Solo destacados ⭐") }
-                )
-                Spacer(Modifier.width(12.dp))
-                SegmentedButtons(sortBy = sortBy, onChangeSort = onChangeSort)
-            }
-        }
-
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxWidth()
-                .navigationBarsPadding(),
-            contentPadding = PaddingValues(bottom = 24.dp)
-        ) {
-            items(events, key = { it.id.ifBlank { it.hashCode().toString() } }) { e ->
-                val dist = distanceKm(
-                    cameraCenter.latitude,
-                    cameraCenter.longitude,
-                    e.latitude,
-                    e.longitude
-                )
-                val interested = e.id.isNotBlank() && interestedIds.contains(e.id)
-                EventRowCard(
-                    event = e,
-                    distKm = dist,
-                    interested = interested,
-                    onToggleInterest = { onToggleInterest(e.id) },
-                    onClick = { onSelect(e) }
-                )
-            }
-        }
-    }
+private enum class SortBy {
+    DISTANCE,
+    NAME,
+    DATE_DESC,
+    DATE_ASC,
+    POPULARITY
 }
+
 
 @Composable
 private fun SegmentedButtons(
@@ -836,16 +864,21 @@ private fun EventRowCard(
             .fillMaxWidth()
     ) {
         Column(Modifier.padding(14.dp)) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(
-                    if (event.adOption == "HIGHLIGHTED") "⭐ ${event.title}" else event.title,
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.SemiBold
-                )
-                Spacer(Modifier.weight(1f))
-
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
                 AssistChip(onClick = onClick, label = { Text("$km km") })
-                Spacer(Modifier.width(8.dp))
+
+                // ❤️ Contador de interesados (si hay)
+                if (event.interestedCount?.takeIf { it > 0 } != null) {
+                    AssistChip(
+                        onClick = {},
+                        label = { Text("❤ ${event.interestedCount}") },
+                        enabled = false
+                    )
+                }
+
                 IconToggleButton(
                     checked = interested,
                     onCheckedChange = { onToggleInterest() }
@@ -866,12 +899,22 @@ private fun EventRowCard(
                     }
                 }
             }
+
+
             Spacer(Modifier.height(6.dp))
             Text(
                 formatEventDate(event.timestamp),
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
+            if ((event.interestedCount ?: 0) > 0) {
+                Text(
+                    text = "❤ ${event.interestedCount} interesados",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.primary
+                )
+                Spacer(Modifier.height(4.dp))
+            }
             Spacer(Modifier.height(4.dp))
             Text(event.description, style = MaterialTheme.typography.bodyMedium, maxLines = 2)
 
@@ -1127,6 +1170,23 @@ private fun formatEventDate(ts: Long): String {
         days in 2..6 -> "Esta semana • $dateStr"
         days < 0 -> "Pasado • $dateStr"
         else -> dateStr
+    }
+}
+
+private fun sortEvents(
+    events: List<Event>,
+    center: LatLng,
+    sortBy: SortBy
+
+): List<Event> {
+    return when (sortBy) {
+        SortBy.DISTANCE -> events.sortedBy {
+            distanceKm(center.latitude, center.longitude, it.latitude, it.longitude)
+        }
+        SortBy.NAME -> events.sortedBy { it.title.lowercase() }
+        SortBy.DATE_DESC -> events.sortedByDescending { it.timestamp }
+        SortBy.DATE_ASC -> events.sortedBy { it.timestamp }
+        SortBy.POPULARITY -> events.sortedByDescending { it.interestedCount ?: 0 }
     }
 }
 

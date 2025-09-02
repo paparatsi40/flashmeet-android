@@ -13,3 +13,10 @@ val FlashOnPrimary = Color.White
 val FlashOnSecondary = Color.Black
 val FlashOnBackground = Color.Black
 val FlashOnSurface = Color.Black
+
+fun Color.toHex(): String {
+    val red = (red * 255).toInt().coerceIn(0, 255)
+    val green = (green * 255).toInt().coerceIn(0, 255)
+    val blue = (blue * 255).toInt().coerceIn(0, 255)
+    return String.format("#%02X%02X%02X", red, green, blue)
+}

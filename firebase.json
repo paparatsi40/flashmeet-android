@@ -1,16 +1,11 @@
 {
-  "functions": [
-    {
-      "source": "functions",
-      "codebase": "default",
-      "ignore": [
-        "node_modules",
-        ".git",
-        "firebase-debug.log",
-        "firebase-debug.*.log",
-        "*.local"
-      ],
-      
-    }
-  ]
+  "hosting": {
+    "public": "public_html",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+  },
+  "functions": {
+    "source": "functions",
+    "runtime": "nodejs20"
+    // Remove "v1": true
+  }
 }

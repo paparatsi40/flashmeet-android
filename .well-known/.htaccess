@@ -1,0 +1,4 @@
+<Files "assetlinks.json">
+  ForceType application/json
+  Header set Content-Type "application/json"
+</Files>

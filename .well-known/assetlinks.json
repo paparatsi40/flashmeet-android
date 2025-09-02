@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.carlitoswy.flashmeet",
+      "sha256_cert_fingerprints": [
+        "4C:85:4F:69:EB:82:C7:F7:0A:88:00:E7:F6:8B:0C:66:C6:B9:8C:35:B8:6C:AD:29:79:B9:EA:68:7C:8D:CC:5E",  // App Signing Key (Play)
+        "46:37:67:83:80:1D:C7:9E:21:03:0E:5E:A0:6B:1F:F6:06:13:1C:7E:2F:C5:61:48:85:78:B0:52:BE:7B:9C:FF"   // Upload Key
+      ]
+    }
+  }
+]

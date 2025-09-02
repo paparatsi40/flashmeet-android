@@ -1,6 +1,7 @@
 // com.carlitoswy.flashmeet.domain.repository.EventRepository.kt
 package com.carlitoswy.flashmeet.domain.repository
 
+import android.net.Uri
 import com.carlitoswy.flashmeet.domain.model.Event
 import kotlinx.coroutines.flow.Flow
 
@@ -13,5 +14,6 @@ interface EventRepository {
 
     suspend fun getEventById(eventId: String): Event?
     suspend fun updateEvent(event: Event)
+    suspend fun uploadEventImage(imageUri: Uri, eventId: String): String?
 
 }

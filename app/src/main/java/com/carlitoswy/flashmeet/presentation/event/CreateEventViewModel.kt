@@ -1,111 +1,185 @@
 package com.carlitoswy.flashmeet.presentation.event
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.location.Location
+import android.location.LocationManager
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.carlitoswy.flashmeet.domain.model.AdOption
 import com.carlitoswy.flashmeet.domain.model.Event
-import com.google.firebase.auth.FirebaseAuth // ¡Importamos FirebaseAuth!
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
+import com.carlitoswy.flashmeet.domain.model.toFirestoreString
+import com.carlitoswy.flashmeet.domain.repository.EventRepository
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await // ¡Importamos el await de Kotlin Coroutines para Tasks!
-import java.util.UUID
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class CreateEventViewModel @Inject constructor(
-    private val firestore: FirebaseFirestore,
-    private val storage: FirebaseStorage,
-    private val auth: FirebaseAuth // ¡Inyectamos FirebaseAuth aquí!
+    private val repository: EventRepository
 ) : ViewModel() {
 
-    private val _isLoading = MutableStateFlow(false)
-    val isLoading: StateFlow<Boolean> = _isLoading
+    private val _uiState = MutableStateFlow(CreateEventUiState())
+    val uiState: StateFlow<CreateEventUiState> = _uiState
 
-    private val _errorMessage = MutableStateFlow<String?>(null)
-    val errorMessage: StateFlow<String?> = _errorMessage
-
-    /**
-     * Estimates the cost of an ad option.
-     * @param adOption The selected advertisement option.
-     * @return A string representing the estimated cost.
-     */
-    fun estimateAdCost(adOption: AdOption): String = when (adOption) {
-        AdOption.NONE -> "Gratis"
-        AdOption.HIGHLIGHTED -> "$5"
-        AdOption.PROMOTED -> "$10"
-        AdOption.BANNER -> "$7"
+    // ✅ Inputs
+    fun onTitleChanged(title: String) {
+        _uiState.value = _uiState.value.copy(title = title)
     }
 
-    /**
-     * Creates a new event, uploads its image (if any), and saves it to Firestore.
-     * @param title The title of the event.
-     * @param description The description of the event.
-     * @param adOption The advertisement option chosen for the event.
-     * @param highlightedText Any special text to highlight the event.
-     * @param imageUri The URI of the image to be uploaded, nullable.
-     * @param locationName The name of the event's location.
-     * @param onSuccess Callback to be invoked upon successful event creation.
-     */
-    fun createEvent(
-        title: String,
-        description: String,
-        adOption: AdOption,
-        highlightedText: String,
-        imageUri: Uri?,
-        locationName: String,
-        onSuccess: () -> Unit
-    ) {
+    fun onDescriptionChanged(desc: String) {
+        _uiState.value = _uiState.value.copy(description = desc)
+    }
+
+    fun onCityChanged(city: String) {
+        _uiState.value = _uiState.value.copy(city = city)
+    }
+
+    fun onDateChanged(date: String) {
+        _uiState.value = _uiState.value.copy(date = date)
+    }
+
+    fun onAdOptionSelected(option: AdOption) {
+        _uiState.value = _uiState.value.copy(adOption = option)
+    }
+
+    fun onFontFamilyChanged(font: String) {
+        _uiState.value = _uiState.value.copy(flyerFontFamily = font)
+    }
+
+    fun onFlyerBackgroundColorChange(colorHex: String) {
+        _uiState.value = _uiState.value.copy(flyerBackgroundColor = colorHex)
+    }
+
+    fun onCreateEvent(context: Context) {
+        createEvent()
+    }
+
+    // ✅ Imagen
+    fun onImageSelected(uri: Uri?) {
+        _uiState.value = _uiState.value.copy(imageUri = uri)
+    }
+
+    // ✅ Diálogos
+    fun showTextColorPicker() {
+        _uiState.value = _uiState.value.copy(showFlyerTextColorPicker = true)
+    }
+
+    fun hideTextColorPicker() {
+        _uiState.value = _uiState.value.copy(showFlyerTextColorPicker = false)
+    }
+
+    fun showBackgroundColorPicker() {
+        _uiState.value = _uiState.value.copy(showFlyerBackgroundColorPicker = true)
+    }
+
+    fun hideBackgroundColorPicker() {
+        _uiState.value = _uiState.value.copy(showFlyerBackgroundColorPicker = false)
+    }
+
+    fun showFontPicker() {
+        _uiState.value = _uiState.value.copy(showFlyerFontPicker = true)
+    }
+
+    fun hideFontPicker() {
+        _uiState.value = _uiState.value.copy(showFlyerFontPicker = false)
+    }
+
+    // ✅ Crear evento
+    fun createEvent() {
+        val state = _uiState.value
+        if (state.title.isBlank() || state.description.isBlank()) {
+            _uiState.value = state.copy(errorMessage = "Completa todos los campos.")
+            return
+        }
+
         viewModelScope.launch {
-            _isLoading.value = true
-            _errorMessage.value = null
+            _uiState.value = state.copy(isLoading = true, errorMessage = null)
 
             try {
-                // Obtener el ID del usuario actual de Firebase Authentication
-                val currentUserId = auth.currentUser?.uid ?: run {
-                    _errorMessage.value = "Debes iniciar sesión para crear un evento."
-                    _isLoading.value = false // Detener el estado de carga
-                    return@launch // Salir de la coroutine ya que no hay usuario
+                val eventId = java.util.UUID.randomUUID().toString()
+                var finalImageUrl: String? = null
+
+                state.imageUri?.let { uri ->
+                    finalImageUrl = repository.uploadEventImage(uri, eventId)
+                    if (finalImageUrl == null) {
+                        _uiState.value = state.copy(isLoading = false, errorMessage = "Error al subir la imagen.")
+                        return@launch
+                    }
                 }
 
-                val id = UUID.randomUUID().toString()
-                var imageUrl: String? = null
-
-                // Si hay una imagen, subirla a Firebase Storage
-                if (imageUri != null) {
-                    val ref = storage.reference.child("event_images/$id.jpg")
-                    ref.putFile(imageUri).await() // Sube la imagen y espera a que termine
-                    imageUrl = ref.downloadUrl.await().toString() // Obtiene la URL de descarga y espera
+                val userId = FirebaseAuth.getInstance().currentUser?.uid ?: run {
+                    _uiState.value = state.copy(isLoading = false, errorMessage = "Usuario no autenticado.")
+                    return@launch
                 }
 
-                // Crear el objeto Event con todos los datos
-                val event = Event(
-                    id = id,
-                    title = title,
-                    description = description,
-                    adOption = adOption.name,
-                    highlightedText = highlightedText,
-                    createdBy = currentUserId, // ¡Usamos el ID del usuario actual aquí!
-                    timestamp = System.currentTimeMillis(),
-                    locationName = locationName,
-                    imageUrl = imageUrl
+                val newEvent = Event(
+                    id = eventId,
+                    title = state.title,
+                    description = state.description,
+                    createdBy = userId,
+                    imageUrl = finalImageUrl,
+                    flyerTextColor = state.flyerTextColor,
+                    flyerBackgroundColor = state.flyerBackgroundColor,
+                    flyerFontFamily = state.flyerFontFamily,
+                    adOption = state.adOption.toFirestoreString(),
+                    latitude = state.latitude ?: 0.0,
+                    longitude = state.longitude ?: 0.0,
+                    city = state.city,
+                    timestamp = System.currentTimeMillis()
                 )
 
-                // Guardar el evento en Firestore
-                firestore.collection("events").document(id).set(event).await() // Guarda el documento y espera
-
-                onSuccess() // Llamar al callback de éxito
+                repository.createEvent(newEvent)
+                _uiState.value = state.copy(
+                    success = true,
+                    isLoading = false,
+                    newEventId = eventId // ✅ Nuevo campo para redirección
+                )
             } catch (e: Exception) {
-                // Capturar y mostrar cualquier error que ocurra
-                _errorMessage.value = e.localizedMessage ?: "Error desconocido al crear el evento."
-            } finally {
-                // Asegurarse de que el estado de carga se desactive siempre
-                _isLoading.value = false
+                _uiState.value = state.copy(isLoading = false, errorMessage = e.message)
             }
+        }
+    }
+
+    fun clearError() {
+        _uiState.value = _uiState.value.copy(errorMessage = null)
+    }
+
+    fun reset() {
+        _uiState.value = CreateEventUiState()
+    }
+
+    fun updateLocation(context: Context) {
+        viewModelScope.launch {
+            val location = getLastKnownLocation(context)
+            _uiState.value = _uiState.value.copy(
+                latitude = location?.latitude,
+                longitude = location?.longitude
+            )
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private suspend fun getLastKnownLocation(context: Context): Location? {
+        return withContext(Dispatchers.IO) {
+            val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+            val providers = locationManager.getProviders(true)
+
+            for (provider in providers.reversed()) {
+                try {
+                    val location = locationManager.getLastKnownLocation(provider)
+                    if (location != null) return@withContext location
+                } catch (e: SecurityException) {
+                    e.printStackTrace()
+                }
+            }
+            return@withContext null
         }
     }
 }

@@ -1,0 +1,2973 @@
+D:\AndroidStudioProjects\FlashMeet git:[main] tree.com
+Folder PATH listing for volume X9 Pro
+Volume serial number is 385C-D4D1
+D:.
+├───.gradle
+│   ├───8.7
+│   │   ├───checksums
+│   │   ├───dependencies-accessors
+│   │   │   └───79860d14012b5743cdb5b59fa32cfea4b62c0dc8
+│   │   │       ├───sources
+│   │   │       │   └───org
+│   │   │       │       └───gradle
+│   │   │       │           └───accessors
+│   │   │       │               └───dm
+│   │   │       └───classes
+│   │   │           └───org
+│   │   │               └───gradle
+│   │   │                   └───accessors
+│   │   │                       └───dm
+│   │   ├───executionHistory
+│   │   ├───expanded
+│   │   ├───fileChanges
+│   │   ├───fileHashes
+│   │   └───vcsMetadata
+│   ├───buildOutputCleanup
+│   ├───kotlin
+│   │   ├───errors
+│   │   └───sessions
+│   ├───vcs-1
+│   └───8.12
+│       ├───fileHashes
+│       ├───fileChanges
+│       ├───checksums
+│       ├───expanded
+│       ├───vcsMetadata
+│       └───executionHistory
+├───.idea
+│   ├───caches
+│   └───inspectionProfiles
+├───.kotlin
+│   ├───errors
+│   └───sessions
+├───app
+│   ├───.gradle
+│   ├───core
+│   ├───data
+│   │   ├───firebase
+│   │   ├───local
+│   │   ├───location
+│   │   ├───mapper
+│   │   └───remote
+│   ├───di
+│   ├───domain
+│   │   ├───model
+│   │   ├───repository
+│   │   └───usecase
+│   ├───presentation
+│   │   ├───createevent
+│   │   └───event
+│   ├───src
+│   │   ├───androidTest
+│   │   │   └───java
+│   │   │       └───com
+│   │   │           └───carlitoswy
+│   │   │               └───flashmeet
+│   │   ├───debug
+│   │   │   └───values
+│   │   ├───main
+│   │   │   ├───java
+│   │   │   │   └───com
+│   │   │   │       └───carlitoswy
+│   │   │   │           └───flashmeet
+│   │   │   │               ├───data
+│   │   │   │               │   ├───location
+│   │   │   │               │   ├───repository
+│   │   │   │               │   ├───model
+│   │   │   │               │   ├───remote
+│   │   │   │               │   │   └───payments
+│   │   │   │               │   └───preferences
+│   │   │   │               ├───datastore
+│   │   │   │               ├───di
+│   │   │   │               ├───domain
+│   │   │   │               │   ├───location
+│   │   │   │               │   ├───usecase
+│   │   │   │               │   │   └───event
+│   │   │   │               │   ├───model
+│   │   │   │               │   └───repository
+│   │   │   │               ├───model
+│   │   │   │               ├───permissions
+│   │   │   │               ├───preferences
+│   │   │   │               ├───presentation
+│   │   │   │               │   ├───createevent
+│   │   │   │               │   ├───event
+│   │   │   │               │   ├───home
+│   │   │   │               │   ├───location
+│   │   │   │               │   ├───login
+│   │   │   │               │   ├───map
+│   │   │   │               │   ├───flyer
+│   │   │   │               │   ├───payment
+│   │   │   │               │   │   └───components
+│   │   │   │               │   ├───shared
+│   │   │   │               │   ├───onboarding
+│   │   │   │               │   ├───welcome
+│   │   │   │               │   ├───settings
+│   │   │   │               │   ├───components
+│   │   │   │               │   ├───forgot
+│   │   │   │               │   ├───search
+│   │   │   │               │   ├───camera
+│   │   │   │               │   └───myevents
+│   │   │   │               ├───repository
+│   │   │   │               ├───ui
+│   │   │   │               │   ├───components
+│   │   │   │               │   ├───navigation
+│   │   │   │               │   ├───screens
+│   │   │   │               │   │   ├───editor
+│   │   │   │               │   │   ├───welcome
+│   │   │   │               │   │   └───settings
+│   │   │   │               │   └───theme
+│   │   │   │               ├───utils
+│   │   │   │               ├───viewmodel
+│   │   │   │               ├───auth
+│   │   │   │               ├───localization
+│   │   │   │               ├───notifications
+│   │   │   │               ├───payments
+│   │   │   │               ├───core
+│   │   │   │               │   └───deeplink
+│   │   │   │               └───tools
+│   │   │   ├───res
+│   │   │   │   ├───drawable
+│   │   │   │   ├───mipmap-anydpi-v26
+│   │   │   │   ├───mipmap-hdpi
+│   │   │   │   ├───mipmap-mdpi
+│   │   │   │   ├───mipmap-xhdpi
+│   │   │   │   ├───mipmap-xxhdpi
+│   │   │   │   ├───mipmap-xxxhdpi
+│   │   │   │   ├───values
+│   │   │   │   ├───xml
+│   │   │   │   ├───raw
+│   │   │   │   ├───values-es
+│   │   │   │   └───values-fr
+│   │   │   └───assets
+│   │   └───test
+│   │       └───java
+│   │           └───com
+│   │               └───carlitoswy
+│   │                   └───flashmeet
+│   ├───sampledata
+│   └───build
+│       ├───generated
+│       │   ├───source
+│       │   │   ├───buildConfig
+│       │   │   │   └───debug
+│       │   │   │       └───com
+│       │   │   │           └───carlitoswy
+│       │   │   │               └───flashmeet
+│       │   │   ├───kapt
+│       │   │   │   └───debug
+│       │   │   │       ├───dagger
+│       │   │   │       │   └───hilt
+│       │   │   │       │       └───internal
+│       │   │   │       │           └───aggregatedroot
+│       │   │   │       │               └───codegen
+│       │   │   │       ├───com
+│       │   │   │       │   └───carlitoswy
+│       │   │   │       │       └───flashmeet
+│       │   │   │       │           ├───presentation
+│       │   │   │       │           │   ├───event
+│       │   │   │       │           │   ├───home
+│       │   │   │       │           │   ├───login
+│       │   │   │       │           │   ├───map
+│       │   │   │       │           │   ├───flyer
+│       │   │   │       │           │   ├───payment
+│       │   │   │       │           │   ├───shared
+│       │   │   │       │           │   ├───forgot
+│       │   │   │       │           │   ├───search
+│       │   │   │       │           │   └───myevents
+│       │   │   │       │           ├───di
+│       │   │   │       │           ├───data
+│       │   │   │       │           │   ├───location
+│       │   │   │       │           │   └───repository
+│       │   │   │       │           ├───datastore
+│       │   │   │       │           ├───domain
+│       │   │   │       │           │   └───usecase
+│       │   │   │       │           │       └───event
+│       │   │   │       │           └───preferences
+│       │   │   │       └───hilt_aggregated_deps
+│       │   │   └───kaptKotlin
+│       │   │       └───debug
+│       │   ├───res
+│       │   │   ├───resValues
+│       │   │   │   └───debug
+│       │   │   ├───injectCrashlyticsMappingFileIdDebug
+│       │   │   │   └───values
+│       │   │   ├───injectCrashlyticsVersionControlInfoDebug
+│       │   │   │   └───values
+│       │   │   ├───processDebugGoogleServices
+│       │   │   │   └───values
+│       │   │   └───pngs
+│       │   │       └───debug
+│       │   ├───ap_generated_sources
+│       │   │   └───debug
+│       │   │       └───out
+│       │   └───hilt
+│       │       ├───component_trees
+│       │       │   └───debug
+│       │       │       ├───com
+│       │       │       │   └───carlitoswy
+│       │       │       │       └───flashmeet
+│       │       │       └───dagger
+│       │       │           └───hilt
+│       │       │               └───internal
+│       │       │                   └───processedrootsentinel
+│       │       │                       └───codegen
+│       │       └───component_sources
+│       │           └───debug
+│       │               └───com
+│       │                   └───carlitoswy
+│       │                       └───flashmeet
+│       ├───intermediates
+│       │   ├───aar_metadata_check
+│       │   │   └───debug
+│       │   │       └───checkDebugAarMetadata
+│       │   ├───source_set_path_map
+│       │   │   └───debug
+│       │   │       └───mapDebugSourceSetPaths
+│       │   ├───nested_resources_validation_report
+│       │   │   └───debug
+│       │   │       └───generateDebugResources
+│       │   ├───merged_res_blame_folder
+│       │   │   └───debug
+│       │   │       └───mergeDebugResources
+│       │   │           └───out
+│       │   │               ├───multi-v2
+│       │   │               └───single
+│       │   ├───data_binding_layout_info_type_merge
+│       │   │   └───debug
+│       │   │       └───mergeDebugResources
+│       │   │           └───out
+│       │   ├───incremental
+│       │   │   ├───debug
+│       │   │   │   ├───mergeDebugResources
+│       │   │   │   │   ├───merged.dir
+│       │   │   │   │   │   ├───values
+│       │   │   │   │   │   ├───values-ps
+│       │   │   │   │   │   ├───values-pt
+│       │   │   │   │   │   ├───values-watch-v21
+│       │   │   │   │   │   ├───values-watch-v20
+│       │   │   │   │   │   ├───values-fil
+│       │   │   │   │   │   ├───values-hmn
+│       │   │   │   │   │   ├───values-mt-rMT
+│       │   │   │   │   │   ├───values-h320dp-port-v13
+│       │   │   │   │   │   ├───values-ldltr-v21
+│       │   │   │   │   │   ├───values-w360dp-port-v13
+│       │   │   │   │   │   ├───values-af
+│       │   │   │   │   │   ├───values-ro-rRO
+│       │   │   │   │   │   ├───values-w320dp-land-v13
+│       │   │   │   │   │   ├───values-zh-rHK
+│       │   │   │   │   │   ├───values-am
+│       │   │   │   │   │   ├───values-ar
+│       │   │   │   │   │   ├───values-as
+│       │   │   │   │   │   ├───values-es-rUS
+│       │   │   │   │   │   ├───values-az
+│       │   │   │   │   │   ├───values-h360dp-land-v13
+│       │   │   │   │   │   ├───values-h480dp-land-v13
+│       │   │   │   │   │   ├───values-ro
+│       │   │   │   │   │   ├───values-ceb
+│       │   │   │   │   │   ├───values-ru
+│       │   │   │   │   │   ├───values-be
+│       │   │   │   │   │   ├───values-bg
+│       │   │   │   │   │   ├───values-rw
+│       │   │   │   │   │   ├───values-bn
+│       │   │   │   │   │   ├───values-th-rTH
+│       │   │   │   │   │   ├───values-bs
+│       │   │   │   │   │   ├───values-sd
+│       │   │   │   │   │   ├───values-bg-rBG
+│       │   │   │   │   │   ├───values-si
+│       │   │   │   │   │   ├───values-fr-rFR
+│       │   │   │   │   │   ├───values-sk
+│       │   │   │   │   │   ├───values-lv-rLV
+│       │   │   │   │   │   ├───values-sl
+│       │   │   │   │   │   ├───values-sm
+│       │   │   │   │   │   ├───values-sn
+│       │   │   │   │   │   ├───values-so
+│       │   │   │   │   │   ├───values-sq
+│       │   │   │   │   │   ├───values-ca
+│       │   │   │   │   │   ├───values-sr
+│       │   │   │   │   │   ├───values-st
+│       │   │   │   │   │   ├───values-su
+│       │   │   │   │   │   ├───values-sv
+│       │   │   │   │   │   ├───values-sw
+│       │   │   │   │   │   ├───values-co
+│       │   │   │   │   │   ├───values-ta
+│       │   │   │   │   │   ├───values-hr-rHR
+│       │   │   │   │   │   ├───values-cs
+│       │   │   │   │   │   ├───values-te
+│       │   │   │   │   │   ├───values-tg
+│       │   │   │   │   │   ├───values-th
+│       │   │   │   │   │   ├───values-cy
+│       │   │   │   │   │   ├───values-tk
+│       │   │   │   │   │   ├───values-tl
+│       │   │   │   │   │   ├───values-xlarge-v4
+│       │   │   │   │   │   ├───values-ldpi-v4
+│       │   │   │   │   │   ├───values-da
+│       │   │   │   │   │   ├───values-tr
+│       │   │   │   │   │   ├───values-xxhdpi-v4
+│       │   │   │   │   │   ├───values-tt
+│       │   │   │   │   │   ├───values-de
+│       │   │   │   │   │   ├───values-sl-rSI
+│       │   │   │   │   │   ├───values-ug
+│       │   │   │   │   │   ├───values-uk
+│       │   │   │   │   │   ├───values-nl-rNL
+│       │   │   │   │   │   ├───values-ur
+│       │   │   │   │   │   ├───values-ms-rMY
+│       │   │   │   │   │   ├───values-mdpi-v4
+│       │   │   │   │   │   ├───values-haw
+│       │   │   │   │   │   ├───values-ru-rRU
+│       │   │   │   │   │   ├───values-uz
+│       │   │   │   │   │   ├───values-et-rEE
+│       │   │   │   │   │   ├───values-el
+│       │   │   │   │   │   ├───values-zh-rTW
+│       │   │   │   │   │   ├───values-en
+│       │   │   │   │   │   ├───values-eo
+│       │   │   │   │   │   ├───values-es
+│       │   │   │   │   │   ├───values-et
+│       │   │   │   │   │   ├───values-eu
+│       │   │   │   │   │   ├───values-vi
+│       │   │   │   │   │   ├───values-w400dp-port-v13
+│       │   │   │   │   │   ├───values-port
+│       │   │   │   │   │   ├───values-w600dp-land-v13
+│       │   │   │   │   │   ├───values-night-v8
+│       │   │   │   │   │   ├───values-fa
+│       │   │   │   │   │   ├───values-zh-rCN
+│       │   │   │   │   │   ├───values-fi
+│       │   │   │   │   │   ├───values-fr
+│       │   │   │   │   │   ├───values-large-v4
+│       │   │   │   │   │   ├───values-fy
+│       │   │   │   │   │   ├───values-cs-rCZ
+│       │   │   │   │   │   ├───values-el-rGR
+│       │   │   │   │   │   ├───values-fil-rPH
+│       │   │   │   │   │   ├───values-ga
+│       │   │   │   │   │   ├───values-small-v4
+│       │   │   │   │   │   ├───values-gd
+│       │   │   │   │   │   ├───values-it-rIT
+│       │   │   │   │   │   ├───values-gl
+│       │   │   │   │   │   ├───values-ca-rES
+│       │   │   │   │   │   ├───values-gu
+│       │   │   │   │   │   ├───values-tr-rTR
+│       │   │   │   │   │   ├───values-xh
+│       │   │   │   │   │   ├───values-ha
+│       │   │   │   │   │   ├───values-hi
+│       │   │   │   │   │   ├───values-sv-rSE
+│       │   │   │   │   │   ├───values-hr
+│       │   │   │   │   │   ├───values-ht
+│       │   │   │   │   │   ├───values-hu
+│       │   │   │   │   │   ├───values-hy
+│       │   │   │   │   │   ├───values-yo
+│       │   │   │   │   │   ├───values-v16
+│       │   │   │   │   │   ├───values-id
+│       │   │   │   │   │   ├───values-v18
+│       │   │   │   │   │   ├───values-v17
+│       │   │   │   │   │   ├───values-ig
+│       │   │   │   │   │   ├───values-in
+│       │   │   │   │   │   ├───values-is
+│       │   │   │   │   │   ├───values-nb-rNO
+│       │   │   │   │   │   ├───values-it
+│       │   │   │   │   │   ├───values-iw
+│       │   │   │   │   │   ├───values-b+sr+Latn
+│       │   │   │   │   │   ├───values-zh
+│       │   │   │   │   │   ├───values-v21
+│       │   │   │   │   │   ├───values-in-rID
+│       │   │   │   │   │   ├───values-v23
+│       │   │   │   │   │   ├───values-ja
+│       │   │   │   │   │   ├───values-v22
+│       │   │   │   │   │   ├───values-v25
+│       │   │   │   │   │   ├───values-v24
+│       │   │   │   │   │   ├───values-pt-rPT
+│       │   │   │   │   │   ├───values-zu
+│       │   │   │   │   │   ├───values-v26
+│       │   │   │   │   │   ├───values-v28
+│       │   │   │   │   │   ├───values-sw600dp-v13
+│       │   │   │   │   │   ├───values-ji
+│       │   │   │   │   │   ├───values-jw
+│       │   │   │   │   │   ├───values-en-rCA
+│       │   │   │   │   │   ├───values-v30
+│       │   │   │   │   │   ├───values-v31
+│       │   │   │   │   │   ├───values-ka
+│       │   │   │   │   │   ├───values-v34
+│       │   │   │   │   │   ├───values-en-rSG
+│       │   │   │   │   │   ├───values-kk
+│       │   │   │   │   │   ├───values-sk-rSK
+│       │   │   │   │   │   ├───values-km
+│       │   │   │   │   │   ├───values-kn
+│       │   │   │   │   │   ├───values-ko
+│       │   │   │   │   │   ├───values-ku
+│       │   │   │   │   │   ├───values-de-rDE
+│       │   │   │   │   │   ├───values-ky
+│       │   │   │   │   │   ├───values-pt-rBR
+│       │   │   │   │   │   ├───values-h720dp-v13
+│       │   │   │   │   │   ├───values-lt-rLT
+│       │   │   │   │   │   ├───values-la
+│       │   │   │   │   │   ├───values-lb
+│       │   │   │   │   │   ├───values-en-rAU
+│       │   │   │   │   │   ├───values-lo
+│       │   │   │   │   │   ├───values-lt
+│       │   │   │   │   │   ├───values-lv
+│       │   │   │   │   │   ├───values-en-rIN
+│       │   │   │   │   │   ├───values-h550dp-port-v13
+│       │   │   │   │   │   ├───values-ldrtl-v17
+│       │   │   │   │   │   ├───values-mg
+│       │   │   │   │   │   ├───values-mi
+│       │   │   │   │   │   ├───values-mk
+│       │   │   │   │   │   ├───values-ml
+│       │   │   │   │   │   ├───values-mn
+│       │   │   │   │   │   ├───values-fr-rCA
+│       │   │   │   │   │   ├───values-mr
+│       │   │   │   │   │   ├───values-ms
+│       │   │   │   │   │   ├───values-mt
+│       │   │   │   │   │   ├───values-vi-rVN
+│       │   │   │   │   │   ├───values-my
+│       │   │   │   │   │   ├───values-nb
+│       │   │   │   │   │   ├───values-ne
+│       │   │   │   │   │   ├───values-ko-rKR
+│       │   │   │   │   │   ├───values-pl-rPL
+│       │   │   │   │   │   ├───values-nl
+│       │   │   │   │   │   ├───values-nn
+│       │   │   │   │   │   ├───values-hu-rHU
+│       │   │   │   │   │   ├───values-no
+│       │   │   │   │   │   ├───values-en-rXC
+│       │   │   │   │   │   ├───values-es-rES
+│       │   │   │   │   │   ├───values-xhdpi-v4
+│       │   │   │   │   │   ├───values-ny
+│       │   │   │   │   │   ├───values-hdpi-v4
+│       │   │   │   │   │   ├───values-en-rGB
+│       │   │   │   │   │   ├───values-land
+│       │   │   │   │   │   ├───values-or
+│       │   │   │   │   │   ├───values-b+es+419
+│       │   │   │   │   │   ├───values-pa
+│       │   │   │   │   │   ├───values-pl
+│       │   │   │   │   │   └───values-nn-rNO
+│       │   │   │   │   └───stripped.dir
+│       │   │   │   └───packageDebugResources
+│       │   │   │       ├───merged.dir
+│       │   │   │       │   ├───values
+│       │   │   │       │   ├───values-fr
+│       │   │   │       │   └───values-es
+│       │   │   │       └───stripped.dir
+│       │   │   ├───mergeDebugShaders
+│       │   │   ├───mergeDebugAssets
+│       │   │   ├───mergeDebugJniLibFolders
+│       │   │   ├───debug-mergeJavaRes
+│       │   │   │   └───zip-cache
+│       │   │   ├───transformDebugClassesWithAsm
+│       │   │   └───packageDebug
+│       │   │       └───tmp
+│       │   │           └───debug
+│       │   │               └───zip-cache
+│       │   ├───merged_res
+│       │   │   └───debug
+│       │   │       └───mergeDebugResources
+│       │   ├───data_binding_layout_info_type_package
+│       │   │   └───debug
+│       │   │       └───packageDebugResources
+│       │   │           └───out
+│       │   ├───packaged_res
+│       │   │   └───debug
+│       │   │       └───packageDebugResources
+│       │   │           ├───values
+│       │   │           ├───values-fr
+│       │   │           ├───values-es
+│       │   │           ├───mipmap-hdpi-v4
+│       │   │           ├───mipmap-xhdpi-v4
+│       │   │           ├───mipmap-mdpi-v4
+│       │   │           ├───drawable
+│       │   │           ├───mipmap-xxhdpi-v4
+│       │   │           ├───xml
+│       │   │           ├───mipmap-xxxhdpi-v4
+│       │   │           ├───mipmap-anydpi-v26
+│       │   │           └───raw
+│       │   ├───local_only_symbol_list
+│       │   │   └───debug
+│       │   │       └───parseDebugLocalResources
+│       │   ├───compatible_screen_manifest
+│       │   │   └───debug
+│       │   │       └───createDebugCompatibleScreenManifests
+│       │   ├───navigation_json
+│       │   │   └───debug
+│       │   │       └───extractDeepLinksDebug
+│       │   ├───manifest_merge_blame_file
+│       │   │   └───debug
+│       │   │       └───processDebugMainManifest
+│       │   ├───merged_manifest
+│       │   │   └───debug
+│       │   │       └───processDebugMainManifest
+│       │   ├───merged_manifests
+│       │   │   └───debug
+│       │   │       └───processDebugManifest
+│       │   ├───packaged_manifests
+│       │   │   └───debug
+│       │   │       └───processDebugManifestForPackage
+│       │   ├───annotation_processor_list
+│       │   │   └───debug
+│       │   │       └───javaPreCompileDebug
+│       │   ├───merged_shaders
+│       │   │   └───debug
+│       │   │       └───mergeDebugShaders
+│       │   │           └───out
+│       │   ├───assets
+│       │   │   └───debug
+│       │   │       └───mergeDebugAssets
+│       │   ├───compressed_assets
+│       │   │   └───debug
+│       │   │       └───compressDebugAssets
+│       │   │           └───out
+│       │   │               └───assets
+│       │   ├───duplicate_classes_check
+│       │   │   └───debug
+│       │   │       └───checkDebugDuplicateClasses
+│       │   ├───external_file_lib_dex_archives
+│       │   │   └───debug
+│       │   │       └───desugarDebugFileDependencies
+│       │   ├───merged_jni_libs
+│       │   │   └───debug
+│       │   │       └───mergeDebugJniLibFolders
+│       │   │           └───out
+│       │   ├───dex
+│       │   │   └───debug
+│       │   │       ├───mergeExtDexDebug
+│       │   │       ├───mergeLibDexDebug
+│       │   │       │   ├───0
+│       │   │       │   ├───1
+│       │   │       │   ├───2
+│       │   │       │   ├───3
+│       │   │       │   ├───4
+│       │   │       │   ├───5
+│       │   │       │   ├───6
+│       │   │       │   ├───7
+│       │   │       │   ├───8
+│       │   │       │   ├───9
+│       │   │       │   ├───10
+│       │   │       │   ├───11
+│       │   │       │   ├───12
+│       │   │       │   ├───13
+│       │   │       │   ├───14
+│       │   │       │   └───15
+│       │   │       └───mergeProjectDexDebug
+│       │   │           ├───0
+│       │   │           ├───1
+│       │   │           ├───2
+│       │   │           ├───3
+│       │   │           ├───4
+│       │   │           ├───5
+│       │   │           ├───6
+│       │   │           ├───7
+│       │   │           ├───8
+│       │   │           ├───9
+│       │   │           ├───10
+│       │   │           ├───11
+│       │   │           ├───12
+│       │   │           ├───13
+│       │   │           ├───14
+│       │   │           └───15
+│       │   ├───merged_native_libs
+│       │   │   └───debug
+│       │   │       └───mergeDebugNativeLibs
+│       │   │           └───out
+│       │   │               └───lib
+│       │   │                   ├───arm64-v8a
+│       │   │                   ├───armeabi-v7a
+│       │   │                   ├───x86
+│       │   │                   └───x86_64
+│       │   ├───merged_test_only_native_libs
+│       │   │   └───debug
+│       │   │       └───mergeDebugNativeLibs
+│       │   │           └───out
+│       │   ├───validate_signing_config
+│       │   │   └───debug
+│       │   │       └───validateSigningDebug
+│       │   ├───app_metadata
+│       │   │   └───debug
+│       │   │       └───writeDebugAppMetadata
+│       │   ├───signing_config_versions
+│       │   │   └───debug
+│       │   │       └───writeDebugSigningConfigVersions
+│       │   ├───compile_and_runtime_not_namespaced_r_class_jar
+│       │   │   └───debug
+│       │   │       └───processDebugResources
+│       │   ├───linked_resources_binary_format
+│       │   │   └───debug
+│       │   │       └───processDebugResources
+│       │   ├───stable_resource_ids_file
+│       │   │   └───debug
+│       │   │       └───processDebugResources
+│       │   ├───symbol_list_with_package_name
+│       │   │   └───debug
+│       │   │       └───processDebugResources
+│       │   ├───runtime_symbol_list
+│       │   │   └───debug
+│       │   │       └───processDebugResources
+│       │   ├───stripped_native_libs
+│       │   │   └───debug
+│       │   │       └───stripDebugDebugSymbols
+│       │   │           └───out
+│       │   │               └───lib
+│       │   │                   ├───arm64-v8a
+│       │   │                   ├───armeabi-v7a
+│       │   │                   ├───x86
+│       │   │                   └───x86_64
+│       │   ├───javac
+│       │   │   └───debug
+│       │   │       └───compileDebugJavaWithJavac
+│       │   │           └───classes
+│       │   │               ├───com
+│       │   │               │   └───carlitoswy
+│       │   │               │       └───flashmeet
+│       │   │               │           ├───presentation
+│       │   │               │           │   ├───event
+│       │   │               │           │   ├───home
+│       │   │               │           │   ├───login
+│       │   │               │           │   ├───map
+│       │   │               │           │   ├───flyer
+│       │   │               │           │   ├───payment
+│       │   │               │           │   ├───shared
+│       │   │               │           │   ├───forgot
+│       │   │               │           │   ├───search
+│       │   │               │           │   └───myevents
+│       │   │               │           ├───di
+│       │   │               │           ├───data
+│       │   │               │           │   ├───location
+│       │   │               │           │   └───repository
+│       │   │               │           ├───datastore
+│       │   │               │           ├───domain
+│       │   │               │           │   └───usecase
+│       │   │               │           │       └───event
+│       │   │               │           └───preferences
+│       │   │               ├───dagger
+│       │   │               │   └───hilt
+│       │   │               │       └───internal
+│       │   │               │           └───aggregatedroot
+│       │   │               │               └───codegen
+│       │   │               └───hilt_aggregated_deps
+│       │   ├───hilt
+│       │   │   └───component_classes
+│       │   │       └───debug
+│       │   │           ├───com
+│       │   │           │   └───carlitoswy
+│       │   │           │       └───flashmeet
+│       │   │           └───dagger
+│       │   │               └───hilt
+│       │   │                   └───internal
+│       │   │                       └───processedrootsentinel
+│       │   │                           └───codegen
+│       │   ├───java_res
+│       │   │   └───debug
+│       │   │       └───processDebugJavaRes
+│       │   │           └───out
+│       │   │               ├───META-INF
+│       │   │               │   └───proguard
+│       │   │               ├───com
+│       │   │               │   └───carlitoswy
+│       │   │               │       └───flashmeet
+│       │   │               │           ├───ui
+│       │   │               │           │   ├───navigation
+│       │   │               │           │   ├───screens
+│       │   │               │           │   │   └───settings
+│       │   │               │           │   ├───components
+│       │   │               │           │   └───theme
+│       │   │               │           ├───presentation
+│       │   │               │           │   ├───settings
+│       │   │               │           │   ├───payment
+│       │   │               │           │   │   └───components
+│       │   │               │           │   ├───home
+│       │   │               │           │   ├───camera
+│       │   │               │           │   ├───search
+│       │   │               │           │   ├───forgot
+│       │   │               │           │   ├───createevent
+│       │   │               │           │   ├───login
+│       │   │               │           │   ├───shared
+│       │   │               │           │   ├───components
+│       │   │               │           │   ├───myevents
+│       │   │               │           │   ├───map
+│       │   │               │           │   ├───welcome
+│       │   │               │           │   ├───location
+│       │   │               │           │   ├───event
+│       │   │               │           │   ├───onboarding
+│       │   │               │           │   └───flyer
+│       │   │               │           ├───notifications
+│       │   │               │           ├───utils
+│       │   │               │           ├───core
+│       │   │               │           │   └───deeplink
+│       │   │               │           ├───data
+│       │   │               │           │   ├───model
+│       │   │               │           │   ├───remote
+│       │   │               │           │   │   └───payments
+│       │   │               │           │   ├───repository
+│       │   │               │           │   ├───preferences
+│       │   │               │           │   └───location
+│       │   │               │           ├───localization
+│       │   │               │           ├───datastore
+│       │   │               │           ├───payments
+│       │   │               │           ├───permissions
+│       │   │               │           ├───repository
+│       │   │               │           ├───di
+│       │   │               │           ├───domain
+│       │   │               │           │   ├───model
+│       │   │               │           │   ├───usecase
+│       │   │               │           │   │   └───event
+│       │   │               │           │   ├───repository
+│       │   │               │           │   └───location
+│       │   │               │           ├───util
+│       │   │               │           ├───preferences
+│       │   │               │           └───auth
+│       │   │               └───dagger
+│       │   │                   └───hilt
+│       │   │                       └───internal
+│       │   │                           └───processedrootsentinel
+│       │   │                               └───codegen
+│       │   ├───merged_java_res
+│       │   │   └───debug
+│       │   │       └───mergeDebugJavaResource
+│       │   ├───classes
+│       │   │   └───debug
+│       │   │       └───transformDebugClassesWithAsm
+│       │   │           ├───dirs
+│       │   │           │   ├───com
+│       │   │           │   │   └───carlitoswy
+│       │   │           │   │       └───flashmeet
+│       │   │           │   │           ├───auth
+│       │   │           │   │           ├───core
+│       │   │           │   │           │   └───deeplink
+│       │   │           │   │           ├───data
+│       │   │           │   │           │   ├───location
+│       │   │           │   │           │   ├───model
+│       │   │           │   │           │   ├───preferences
+│       │   │           │   │           │   ├───remote
+│       │   │           │   │           │   │   └───payments
+│       │   │           │   │           │   └───repository
+│       │   │           │   │           ├───datastore
+│       │   │           │   │           ├───di
+│       │   │           │   │           ├───domain
+│       │   │           │   │           │   ├───location
+│       │   │           │   │           │   ├───model
+│       │   │           │   │           │   ├───repository
+│       │   │           │   │           │   └───usecase
+│       │   │           │   │           │       └───event
+│       │   │           │   │           ├───localization
+│       │   │           │   │           ├───notifications
+│       │   │           │   │           ├───payments
+│       │   │           │   │           ├───permissions
+│       │   │           │   │           ├───preferences
+│       │   │           │   │           ├───presentation
+│       │   │           │   │           │   ├───camera
+│       │   │           │   │           │   ├───components
+│       │   │           │   │           │   ├───createevent
+│       │   │           │   │           │   ├───event
+│       │   │           │   │           │   ├───flyer
+│       │   │           │   │           │   ├───forgot
+│       │   │           │   │           │   ├───home
+│       │   │           │   │           │   ├───location
+│       │   │           │   │           │   ├───login
+│       │   │           │   │           │   ├───map
+│       │   │           │   │           │   ├───myevents
+│       │   │           │   │           │   ├───onboarding
+│       │   │           │   │           │   ├───payment
+│       │   │           │   │           │   │   └───components
+│       │   │           │   │           │   ├───search
+│       │   │           │   │           │   ├───settings
+│       │   │           │   │           │   ├───shared
+│       │   │           │   │           │   └───welcome
+│       │   │           │   │           ├───repository
+│       │   │           │   │           ├───ui
+│       │   │           │   │           │   ├───components
+│       │   │           │   │           │   ├───navigation
+│       │   │           │   │           │   ├───screens
+│       │   │           │   │           │   │   └───settings
+│       │   │           │   │           │   └───theme
+│       │   │           │   │           ├───utils
+│       │   │           │   │           └───util
+│       │   │           │   ├───META-INF
+│       │   │           │   │   └───proguard
+│       │   │           │   ├───dagger
+│       │   │           │   │   └───hilt
+│       │   │           │   │       └───internal
+│       │   │           │   │           ├───processedrootsentinel
+│       │   │           │   │           │   └───codegen
+│       │   │           │   │           └───aggregatedroot
+│       │   │           │   │               └───codegen
+│       │   │           │   └───hilt_aggregated_deps
+│       │   │           └───jars
+│       │   ├───external_libs_dex_archive_with_artifact_transforms
+│       │   │   └───debug
+│       │   │       └───dexBuilderDebug
+│       │   │           └───out
+│       │   ├───external_libs_dex_archive
+│       │   │   └───debug
+│       │   │       └───dexBuilderDebug
+│       │   │           └───out
+│       │   ├───mixed_scope_dex_archive
+│       │   │   └───debug
+│       │   │       └───dexBuilderDebug
+│       │   │           └───out
+│       │   ├───project_dex_archive
+│       │   │   └───debug
+│       │   │       └───dexBuilderDebug
+│       │   │           └───out
+│       │   │               ├───hilt_aggregated_deps
+│       │   │               ├───com
+│       │   │               │   └───carlitoswy
+│       │   │               │       └───flashmeet
+│       │   │               │           ├───ui
+│       │   │               │           │   ├───theme
+│       │   │               │           │   ├───screens
+│       │   │               │           │   │   └───settings
+│       │   │               │           │   ├───navigation
+│       │   │               │           │   └───components
+│       │   │               │           ├───presentation
+│       │   │               │           │   ├───event
+│       │   │               │           │   ├───payment
+│       │   │               │           │   │   └───components
+│       │   │               │           │   ├───login
+│       │   │               │           │   ├───home
+│       │   │               │           │   ├───components
+│       │   │               │           │   ├───search
+│       │   │               │           │   ├───shared
+│       │   │               │           │   ├───flyer
+│       │   │               │           │   ├───onboarding
+│       │   │               │           │   ├───settings
+│       │   │               │           │   ├───forgot
+│       │   │               │           │   ├───map
+│       │   │               │           │   ├───myevents
+│       │   │               │           │   ├───camera
+│       │   │               │           │   ├───welcome
+│       │   │               │           │   ├───createevent
+│       │   │               │           │   └───location
+│       │   │               │           ├───datastore
+│       │   │               │           ├───data
+│       │   │               │           │   ├───repository
+│       │   │               │           │   ├───location
+│       │   │               │           │   ├───preferences
+│       │   │               │           │   ├───remote
+│       │   │               │           │   │   └───payments
+│       │   │               │           │   └───model
+│       │   │               │           ├───payments
+│       │   │               │           ├───utils
+│       │   │               │           ├───di
+│       │   │               │           ├───preferences
+│       │   │               │           ├───domain
+│       │   │               │           │   ├───usecase
+│       │   │               │           │   │   └───event
+│       │   │               │           │   ├───repository
+│       │   │               │           │   ├───location
+│       │   │               │           │   └───model
+│       │   │               │           ├───localization
+│       │   │               │           ├───util
+│       │   │               │           ├───repository
+│       │   │               │           ├───auth
+│       │   │               │           ├───permissions
+│       │   │               │           ├───notifications
+│       │   │               │           └───core
+│       │   │               │               └───deeplink
+│       │   │               └───dagger
+│       │   │                   └───hilt
+│       │   │                       └───internal
+│       │   │                           ├───aggregatedroot
+│       │   │                           │   └───codegen
+│       │   │                           └───processedrootsentinel
+│       │   │                               └───codegen
+│       │   ├───sub_project_dex_archive
+│       │   │   └───debug
+│       │   │       └───dexBuilderDebug
+│       │   │           └───out
+│       │   ├───desugar_graph
+│       │   │   └───debug
+│       │   │       └───dexBuilderDebug
+│       │   │           └───out
+│       │   │               ├───currentProject
+│       │   │               │   ├───jar_635a6cb3ebed4c432384a3c2d3dedb7a8367749e223db4027d074a89b75b077f_bucket_1
+│       │   │               │   ├───jar_635a6cb3ebed4c432384a3c2d3dedb7a8367749e223db4027d074a89b75b077f_bucket_2
+│       │   │               │   ├───jar_635a6cb3ebed4c432384a3c2d3dedb7a8367749e223db4027d074a89b75b077f_bucket_0
+│       │   │               │   ├───jar_635a6cb3ebed4c432384a3c2d3dedb7a8367749e223db4027d074a89b75b077f_bucket_3
+│       │   │               │   ├───dirs_bucket_2
+│       │   │               │   ├───dirs_bucket_0
+│       │   │               │   ├───dirs_bucket_3
+│       │   │               │   └───dirs_bucket_1
+│       │   │               ├───otherProjects
+│       │   │               ├───mixedScopes
+│       │   │               └───externalLibs
+│       │   ├───dex_archive_input_jar_hashes
+│       │   │   └───debug
+│       │   │       └───dexBuilderDebug
+│       │   ├───dex_number_of_buckets_file
+│       │   │   └───debug
+│       │   │       └───dexBuilderDebug
+│       │   ├───apk_ide_redirect_file
+│       │   │   └───debug
+│       │   │       └───createDebugApkListingFileRedirect
+│       │   └───apk
+│       │       └───debug
+│       ├───crashlytics
+│       │   └───debug
+│       ├───outputs
+│       │   ├───logs
+│       │   └───apk
+│       │       └───debug
+│       ├───kotlin
+│       │   ├───kaptGenerateStubsDebugKotlin
+│       │   │   ├───classpath-snapshot
+│       │   │   ├───cacheable
+│       │   │   │   └───caches-jvm
+│       │   │   │       ├───inputs
+│       │   │   │       ├───lookups
+│       │   │   │       └───jvm
+│       │   │   │           └───kotlin
+│       │   │   └───local-state
+│       │   └───compileDebugKotlin
+│       │       ├───classpath-snapshot
+│       │       ├───cacheable
+│       │       │   └───caches-jvm
+│       │       │       ├───inputs
+│       │       │       ├───lookups
+│       │       │       └───jvm
+│       │       │           └───kotlin
+│       │       └───local-state
+│       └───tmp
+│           ├───kapt3
+│           │   ├───incrementalData
+│           │   │   └───debug
+│           │   │       ├───com
+│           │   │       │   └───carlitoswy
+│           │   │       │       └───flashmeet
+│           │   │       │           ├───data
+│           │   │       │           │   ├───location
+│           │   │       │           │   ├───repository
+│           │   │       │           │   ├───model
+│           │   │       │           │   ├───remote
+│           │   │       │           │   │   └───payments
+│           │   │       │           │   └───preferences
+│           │   │       │           ├───datastore
+│           │   │       │           ├───di
+│           │   │       │           ├───domain
+│           │   │       │           │   ├───location
+│           │   │       │           │   ├───usecase
+│           │   │       │           │   │   └───event
+│           │   │       │           │   ├───model
+│           │   │       │           │   └───repository
+│           │   │       │           ├───permissions
+│           │   │       │           ├───preferences
+│           │   │       │           ├───presentation
+│           │   │       │           │   ├───createevent
+│           │   │       │           │   ├───event
+│           │   │       │           │   ├───home
+│           │   │       │           │   ├───location
+│           │   │       │           │   ├───login
+│           │   │       │           │   ├───map
+│           │   │       │           │   ├───flyer
+│           │   │       │           │   ├───payment
+│           │   │       │           │   │   └───components
+│           │   │       │           │   ├───shared
+│           │   │       │           │   ├───onboarding
+│           │   │       │           │   ├───welcome
+│           │   │       │           │   ├───settings
+│           │   │       │           │   ├───components
+│           │   │       │           │   ├───forgot
+│           │   │       │           │   ├───search
+│           │   │       │           │   ├───camera
+│           │   │       │           │   └───myevents
+│           │   │       │           ├───repository
+│           │   │       │           ├───ui
+│           │   │       │           │   ├───components
+│           │   │       │           │   ├───navigation
+│           │   │       │           │   ├───screens
+│           │   │       │           │   │   └───settings
+│           │   │       │           │   └───theme
+│           │   │       │           ├───utils
+│           │   │       │           ├───util
+│           │   │       │           ├───auth
+│           │   │       │           ├───localization
+│           │   │       │           ├───notifications
+│           │   │       │           ├───payments
+│           │   │       │           └───core
+│           │   │       │               └───deeplink
+│           │   │       └───META-INF
+│           │   ├───stubs
+│           │   │   └───debug
+│           │   │       ├───com
+│           │   │       │   └───carlitoswy
+│           │   │       │       └───flashmeet
+│           │   │       │           ├───data
+│           │   │       │           │   ├───location
+│           │   │       │           │   ├───repository
+│           │   │       │           │   ├───model
+│           │   │       │           │   ├───remote
+│           │   │       │           │   │   └───payments
+│           │   │       │           │   └───preferences
+│           │   │       │           ├───datastore
+│           │   │       │           ├───di
+│           │   │       │           ├───domain
+│           │   │       │           │   ├───location
+│           │   │       │           │   ├───usecase
+│           │   │       │           │   │   └───event
+│           │   │       │           │   ├───model
+│           │   │       │           │   └───repository
+│           │   │       │           ├───permissions
+│           │   │       │           ├───preferences
+│           │   │       │           ├───presentation
+│           │   │       │           │   ├───createevent
+│           │   │       │           │   ├───event
+│           │   │       │           │   ├───home
+│           │   │       │           │   ├───location
+│           │   │       │           │   ├───login
+│           │   │       │           │   ├───map
+│           │   │       │           │   ├───flyer
+│           │   │       │           │   ├───payment
+│           │   │       │           │   │   └───components
+│           │   │       │           │   ├───shared
+│           │   │       │           │   ├───onboarding
+│           │   │       │           │   ├───welcome
+│           │   │       │           │   ├───settings
+│           │   │       │           │   ├───components
+│           │   │       │           │   ├───forgot
+│           │   │       │           │   ├───search
+│           │   │       │           │   ├───camera
+│           │   │       │           │   └───myevents
+│           │   │       │           ├───repository
+│           │   │       │           ├───ui
+│           │   │       │           │   ├───components
+│           │   │       │           │   ├───navigation
+│           │   │       │           │   ├───screens
+│           │   │       │           │   │   └───settings
+│           │   │       │           │   └───theme
+│           │   │       │           ├───utils
+│           │   │       │           ├───util
+│           │   │       │           ├───auth
+│           │   │       │           ├───localization
+│           │   │       │           ├───notifications
+│           │   │       │           ├───payments
+│           │   │       │           └───core
+│           │   │       │               └───deeplink
+│           │   │       └───error
+│           │   ├───classes
+│           │   │   └───debug
+│           │   │       └───META-INF
+│           │   │           └───proguard
+│           │   └───incApCache
+│           │       └───debug
+│           ├───kotlin-classes
+│           │   └───debug
+│           │       ├───com
+│           │       │   └───carlitoswy
+│           │       │       └───flashmeet
+│           │       │           ├───auth
+│           │       │           ├───core
+│           │       │           │   └───deeplink
+│           │       │           ├───data
+│           │       │           │   ├───location
+│           │       │           │   ├───model
+│           │       │           │   ├───preferences
+│           │       │           │   ├───remote
+│           │       │           │   │   └───payments
+│           │       │           │   └───repository
+│           │       │           ├───datastore
+│           │       │           ├───di
+│           │       │           ├───domain
+│           │       │           │   ├───location
+│           │       │           │   ├───model
+│           │       │           │   ├───repository
+│           │       │           │   └───usecase
+│           │       │           │       └───event
+│           │       │           ├───localization
+│           │       │           ├───notifications
+│           │       │           ├───payments
+│           │       │           ├───permissions
+│           │       │           ├───preferences
+│           │       │           ├───presentation
+│           │       │           │   ├───camera
+│           │       │           │   ├───components
+│           │       │           │   ├───createevent
+│           │       │           │   ├───event
+│           │       │           │   ├───flyer
+│           │       │           │   ├───forgot
+│           │       │           │   ├───home
+│           │       │           │   ├───location
+│           │       │           │   ├───login
+│           │       │           │   ├───map
+│           │       │           │   ├───myevents
+│           │       │           │   ├───onboarding
+│           │       │           │   ├───payment
+│           │       │           │   │   └───components
+│           │       │           │   ├───search
+│           │       │           │   ├───settings
+│           │       │           │   ├───shared
+│           │       │           │   └───welcome
+│           │       │           ├───repository
+│           │       │           ├───ui
+│           │       │           │   ├───components
+│           │       │           │   ├───navigation
+│           │       │           │   ├───screens
+│           │       │           │   │   └───settings
+│           │       │           │   └───theme
+│           │       │           ├───utils
+│           │       │           └───util
+│           │       └───META-INF
+│           ├───compileDebugJavaWithJavac
+│           └───hiltJavaCompileDebug
+├───gradle
+│   └───wrapper
+├───functions
+│   └───node_modules
+│       ├───qs
+│       │   ├───test
+│       │   ├───lib
+│       │   ├───dist
+│       │   └───.github
+│       ├───es-errors
+│       │   ├───test
+│       │   └───.github
+│       ├───object-inspect
+│       │   ├───example
+│       │   ├───test
+│       │   │   └───browser
+│       │   └───.github
+│       ├───side-channel
+│       │   ├───test
+│       │   └───.github
+│       ├───side-channel-list
+│       │   ├───test
+│       │   └───.github
+│       ├───side-channel-map
+│       │   ├───test
+│       │   └───.github
+│       ├───side-channel-weakmap
+│       │   ├───test
+│       │   └───.github
+│       ├───call-bound
+│       │   ├───test
+│       │   └───.github
+│       ├───get-intrinsic
+│       │   ├───test
+│       │   └───.github
+│       ├───call-bind-apply-helpers
+│       │   ├───test
+│       │   └───.github
+│       ├───es-define-property
+│       │   ├───test
+│       │   └───.github
+│       ├───function-bind
+│       │   ├───test
+│       │   └───.github
+│       ├───es-object-atoms
+│       │   ├───test
+│       │   └───.github
+│       ├───get-proto
+│       │   ├───test
+│       │   └───.github
+│       ├───has-symbols
+│       │   ├───test
+│       │   │   └───shams
+│       │   └───.github
+│       ├───math-intrinsics
+│       │   ├───test
+│       │   ├───constants
+│       │   └───.github
+│       ├───gopd
+│       │   ├───test
+│       │   └───.github
+│       ├───dunder-proto
+│       │   ├───test
+│       │   └───.github
+│       ├───hasown
+│       │   └───.github
+│       ├───stripe
+│       │   ├───types
+│       │   │   ├───test
+│       │   │   ├───FinancialConnections
+│       │   │   ├───Entitlements
+│       │   │   ├───Billing
+│       │   │   ├───Issuing
+│       │   │   ├───TestHelpers
+│       │   │   │   ├───Issuing
+│       │   │   │   ├───Treasury
+│       │   │   │   └───Terminal
+│       │   │   ├───Tax
+│       │   │   ├───BillingPortal
+│       │   │   ├───Terminal
+│       │   │   ├───Treasury
+│       │   │   ├───crypto
+│       │   │   ├───Radar
+│       │   │   ├───V2
+│       │   │   │   ├───Core
+│       │   │   │   └───Billing
+│       │   │   ├───net
+│       │   │   ├───Climate
+│       │   │   ├───Reporting
+│       │   │   ├───Forwarding
+│       │   │   ├───Sigma
+│       │   │   ├───Apps
+│       │   │   ├───Checkout
+│       │   │   └───Identity
+│       │   ├───cjs
+│       │   │   ├───resources
+│       │   │   │   ├───FinancialConnections
+│       │   │   │   ├───Entitlements
+│       │   │   │   ├───Billing
+│       │   │   │   ├───Issuing
+│       │   │   │   ├───TestHelpers
+│       │   │   │   │   ├───Issuing
+│       │   │   │   │   ├───Treasury
+│       │   │   │   │   └───Terminal
+│       │   │   │   ├───Tax
+│       │   │   │   ├───BillingPortal
+│       │   │   │   ├───Terminal
+│       │   │   │   ├───Treasury
+│       │   │   │   ├───Radar
+│       │   │   │   ├───V2
+│       │   │   │   │   ├───Core
+│       │   │   │   │   └───Billing
+│       │   │   │   ├───Climate
+│       │   │   │   ├───Reporting
+│       │   │   │   ├───Forwarding
+│       │   │   │   ├───Sigma
+│       │   │   │   ├───Apps
+│       │   │   │   ├───Checkout
+│       │   │   │   └───Identity
+│       │   │   ├───crypto
+│       │   │   ├───net
+│       │   │   └───platform
+│       │   └───esm
+│       │       ├───resources
+│       │       │   ├───FinancialConnections
+│       │       │   ├───Entitlements
+│       │       │   ├───Billing
+│       │       │   ├───Issuing
+│       │       │   ├───TestHelpers
+│       │       │   │   ├───Issuing
+│       │       │   │   ├───Treasury
+│       │       │   │   └───Terminal
+│       │       │   ├───Tax
+│       │       │   ├───BillingPortal
+│       │       │   ├───Terminal
+│       │       │   ├───Treasury
+│       │       │   ├───Radar
+│       │       │   ├───V2
+│       │       │   │   ├───Core
+│       │       │   │   └───Billing
+│       │       │   ├───Climate
+│       │       │   ├───Reporting
+│       │       │   ├───Forwarding
+│       │       │   ├───Sigma
+│       │       │   ├───Apps
+│       │       │   ├───Checkout
+│       │       │   └───Identity
+│       │       ├───crypto
+│       │       ├───net
+│       │       └───platform
+│       ├───node-forge
+│       │   ├───lib
+│       │   ├───dist
+│       │   └───flash
+│       │       └───swf
+│       ├───uuid
+│       │   └───dist
+│       │       ├───bin
+│       │       ├───commonjs-browser
+│       │       ├───esm-browser
+│       │       └───esm-node
+│       ├───text-decoding
+│       │   ├───build
+│       │   │   ├───implementations
+│       │   │   └───lib
+│       │   ├───src
+│       │   │   ├───implementations
+│       │   │   └───lib
+│       │   └───types
+│       ├───tslib
+│       │   └───modules
+│       ├───faye-websocket
+│       │   └───lib
+│       │       └───faye
+│       │           └───websocket
+│       │               └───api
+│       ├───fast-deep-equal
+│       │   └───es6
+│       ├───protobufjs
+│       │   ├───google
+│       │   │   ├───api
+│       │   │   └───protobuf
+│       │   ├───src
+│       │   │   ├───util
+│       │   │   └───rpc
+│       │   ├───ext
+│       │   │   ├───debug
+│       │   │   └───descriptor
+│       │   ├───scripts
+│       │   └───dist
+│       │       ├───light
+│       │       └───minimal
+│       ├───functional-red-black-tree
+│       │   ├───bench
+│       │   └───test
+│       ├───abort-controller
+│       │   └───dist
+│       ├───async-retry
+│       │   └───lib
+│       ├───compressible
+│       ├───duplexify
+│       ├───ent
+│       │   ├───test
+│       │   ├───examples
+│       │   └───.github
+│       ├───extend
+│       ├───fast-xml-parser
+│       │   └───src
+│       │       ├───v5
+│       │       │   ├───OutputBuilders
+│       │       │   ├───valueParsers
+│       │       │   └───inputSource
+│       │       ├───v6
+│       │       │   ├───OutputBuilders
+│       │       │   ├───valueParsers
+│       │       │   └───inputSource
+│       │       ├───cli
+│       │       ├───xmlparser
+│       │       └───xmlbuilder
+│       ├───gaxios
+│       │   └───build
+│       │       └───src
+│       ├───google-auth-library
+│       │   └───build
+│       │       └───src
+│       │           ├───auth
+│       │           └───crypto
+│       │               ├───browser
+│       │               └───node
+│       ├───mime
+│       │   └───types
+│       ├───p-limit
+│       ├───teeny-request
+│       │   └───build
+│       │       └───src
+│       ├───arrify
+│       ├───undici-types
+│       ├───event-target-shim
+│       │   └───dist
+│       ├───retry
+│       │   ├───example
+│       │   └───lib
+│       ├───mime-db
+│       ├───end-of-stream
+│       ├───inherits
+│       ├───stream-shift
+│       │   └───.github
+│       │       └───workflows
+│       ├───readable-stream
+│       │   └───lib
+│       │       └───internal
+│       │           └───streams
+│       ├───once
+│       ├───punycode
+│       ├───safe-regex-test
+│       │   ├───test
+│       │   └───.github
+│       ├───strnum
+│       │   └───.vscode
+│       ├───websocket-driver
+│       │   └───lib
+│       │       └───websocket
+│       │           └───driver
+│       │               └───hybi
+│       ├───cors
+│       │   └───lib
+│       ├───object-assign
+│       ├───vary
+│       ├───accepts
+│       ├───array-flatten
+│       ├───content-disposition
+│       ├───content-type
+│       ├───cookie
+│       ├───cookie-signature
+│       ├───depd
+│       │   └───lib
+│       │       └───browser
+│       ├───debug
+│       │   └───src
+│       ├───encodeurl
+│       ├───escape-html
+│       ├───etag
+│       ├───finalhandler
+│       ├───fresh
+│       ├───http-errors
+│       ├───merge-descriptors
+│       ├───methods
+│       ├───on-finished
+│       ├───path-to-regexp
+│       ├───parseurl
+│       ├───proxy-addr
+│       ├───range-parser
+│       ├───safe-buffer
+│       ├───serve-static
+│       ├───setprototypeof
+│       │   └───test
+│       ├───statuses
+│       ├───type-is
+│       ├───negotiator
+│       │   └───lib
+│       ├───utils-merge
+│       ├───bytes
+│       ├───raw-body
+│       ├───unpipe
+│       ├───ms
+│       ├───iconv-lite
+│       │   ├───encodings
+│       │   │   └───tables
+│       │   └───lib
+│       ├───destroy
+│       ├───is-stream
+│       ├───node-fetch
+│       │   └───lib
+│       ├───base64-js
+│       ├───fast-text-encoding
+│       ├───gcp-metadata
+│       │   └───build
+│       │       └───src
+│       ├───ecdsa-sig-formatter
+│       │   └───src
+│       ├───gtoken
+│       │   └───build
+│       │       └───src
+│       ├───jws
+│       │   └───lib
+│       ├───lru-cache
+│       ├───object-hash
+│       │   └───dist
+│       ├───is-stream-ended
+│       ├───proto3-json-serializer
+│       │   └───build
+│       │       └───src
+│       ├───json-bigint
+│       │   └───lib
+│       ├───lodash.camelcase
+│       ├───protobufjs-cli
+│       │   ├───lib
+│       │   │   └───tsd-jsdoc
+│       │   ├───bin
+│       │   ├───wrappers
+│       │   ├───targets
+│       │   └───scripts
+│       ├───yargs
+│       │   ├───build
+│       │   │   └───lib
+│       │   │       ├───utils
+│       │   │       └───typings
+│       │   ├───helpers
+│       │   ├───locales
+│       │   └───lib
+│       │       └───platform-shims
+│       ├───long
+│       │   └───umd
+│       ├───google-p12-pem
+│       │   └───build
+│       │       └───src
+│       │           └───bin
+│       ├───toidentifier
+│       ├───bignumber.js
+│       │   └───doc
+│       ├───safer-buffer
+│       ├───lodash.includes
+│       ├───lodash.isboolean
+│       ├───lodash.isnumber
+│       ├───lodash.isinteger
+│       ├───lodash.isplainobject
+│       ├───lodash.isstring
+│       ├───lodash.once
+│       ├───semver
+│       │   ├───functions
+│       │   ├───classes
+│       │   ├───internal
+│       │   ├───ranges
+│       │   └───bin
+│       ├───jose
+│       │   └───dist
+│       │       ├───browser
+│       │       │   ├───lib
+│       │       │   ├───runtime
+│       │       │   ├───util
+│       │       │   ├───jwe
+│       │       │   │   ├───compact
+│       │       │   │   ├───flattened
+│       │       │   │   └───general
+│       │       │   ├───jwt
+│       │       │   ├───jwk
+│       │       │   ├───key
+│       │       │   ├───jwks
+│       │       │   └───jws
+│       │       │       ├───compact
+│       │       │       ├───flattened
+│       │       │       └───general
+│       │       ├───node
+│       │       │   ├───cjs
+│       │       │   │   ├───lib
+│       │       │   │   ├───runtime
+│       │       │   │   ├───util
+│       │       │   │   ├───jwe
+│       │       │   │   │   ├───compact
+│       │       │   │   │   ├───flattened
+│       │       │   │   │   └───general
+│       │       │   │   ├───jwt
+│       │       │   │   ├───jwk
+│       │       │   │   ├───key
+│       │       │   │   ├───jwks
+│       │       │   │   └───jws
+│       │       │   │       ├───compact
+│       │       │   │       ├───flattened
+│       │       │   │       └───general
+│       │       │   └───esm
+│       │       │       ├───lib
+│       │       │       ├───runtime
+│       │       │       ├───util
+│       │       │       ├───jwe
+│       │       │       │   ├───compact
+│       │       │       │   ├───flattened
+│       │       │       │   └───general
+│       │       │       ├───jwt
+│       │       │       ├───jwk
+│       │       │       ├───key
+│       │       │       ├───jwks
+│       │       │       └───jws
+│       │       │           ├───compact
+│       │       │           ├───flattened
+│       │       │           └───general
+│       │       └───types
+│       │           ├───util
+│       │           ├───jwe
+│       │           │   ├───compact
+│       │           │   ├───flattened
+│       │           │   └───general
+│       │           ├───jwt
+│       │           ├───jwk
+│       │           ├───key
+│       │           ├───jwks
+│       │           └───jws
+│       │               ├───compact
+│       │               ├───flattened
+│       │               └───general
+│       ├───lru-memoizer
+│       │   ├───lib
+│       │   └───test
+│       ├───limiter
+│       │   ├───lib
+│       │   └───test
+│       ├───jwa
+│       ├───buffer-equal-constant-time
+│       ├───yallist
+│       ├───lodash.clonedeep
+│       ├───whatwg-url
+│       │   └───lib
+│       ├───yocto-queue
+│       ├───ee-first
+│       ├───wrappy
+│       ├───chalk
+│       │   └───source
+│       ├───estraverse
+│       ├───espree
+│       │   ├───dist
+│       │   └───lib
+│       ├───glob
+│       ├───jsdoc
+│       │   ├───.vscode
+│       │   ├───lib
+│       │   │   └───jsdoc
+│       │   │       ├───opts
+│       │   │       ├───src
+│       │   │       ├───tag
+│       │   │       │   └───dictionary
+│       │   │       ├───tutorial
+│       │   │       └───util
+│       │   ├───plugins
+│       │   │   └───test
+│       │   │       ├───fixtures
+│       │   │       └───specs
+│       │   └───templates
+│       │       ├───default
+│       │       │   ├───static
+│       │       │   │   ├───fonts
+│       │       │   │   ├───scripts
+│       │       │   │   │   └───prettify
+│       │       │   │   └───styles
+│       │       │   └───tmpl
+│       │       ├───haruki
+│       │       └───silent
+│       ├───minimist
+│       │   ├───test
+│       │   ├───example
+│       │   └───.github
+│       ├───ansi-styles
+│       ├───tmp
+│       │   └───lib
+│       ├───uglify-js
+│       │   ├───bin
+│       │   ├───tools
+│       │   └───lib
+│       ├───supports-color
+│       ├───color-convert
+│       ├───color-name
+│       ├───esprima
+│       │   ├───bin
+│       │   └───dist
+│       ├───optionator
+│       │   └───lib
+│       ├───esutils
+│       │   └───lib
+│       ├───source-map
+│       │   ├───lib
+│       │   └───dist
+│       ├───acorn-jsx
+│       ├───acorn
+│       │   ├───bin
+│       │   └───dist
+│       ├───eslint-visitor-keys
+│       │   ├───dist
+│       │   └───lib
+│       ├───fs.realpath
+│       ├───inflight
+│       ├───minimatch
+│       │   └───lib
+│       ├───bluebird
+│       │   └───js
+│       │       ├───browser
+│       │       └───release
+│       ├───catharsis
+│       │   ├───lib
+│       │   ├───bin
+│       │   └───res
+│       ├───js2xmlparser
+│       │   └───lib
+│       ├───escape-string-regexp
+│       ├───markdown-it
+│       │   ├───dist
+│       │   ├───lib
+│       │   │   ├───rules_inline
+│       │   │   ├───rules_core
+│       │   │   ├───rules_block
+│       │   │   ├───presets
+│       │   │   ├───common
+│       │   │   └───helpers
+│       │   └───bin
+│       ├───klaw
+│       │   └───src
+│       ├───markdown-it-anchor
+│       │   ├───dist
+│       │   └───types
+│       ├───marked
+│       │   ├───man
+│       │   ├───lib
+│       │   ├───src
+│       │   └───bin
+│       ├───mkdirp
+│       │   ├───bin
+│       │   └───lib
+│       ├───requizzle
+│       │   └───lib
+│       │       └───wrappers
+│       ├───strip-json-comments
+│       ├───underscore
+│       │   ├───modules
+│       │   ├───amd
+│       │   └───cjs
+│       ├───lodash
+│       │   └───fp
+│       ├───xmlcreate
+│       │   └───lib
+│       │       └───nodes
+│       ├───graceful-fs
+│       ├───argparse
+│       │   └───lib
+│       ├───entities
+│       │   └───lib
+│       │       ├───esm
+│       │       │   └───generated
+│       │       └───generated
+│       ├───linkify-it
+│       │   ├───build
+│       │   └───lib
+│       ├───mdurl
+│       │   ├───build
+│       │   └───lib
+│       ├───punycode.js
+│       ├───uc.micro
+│       │   ├───build
+│       │   ├───categories
+│       │   │   ├───Cc
+│       │   │   ├───Cf
+│       │   │   ├───P
+│       │   │   ├───S
+│       │   │   └───Z
+│       │   └───properties
+│       │       └───Any
+│       ├───brace-expansion
+│       │   └───.github
+│       ├───balanced-match
+│       │   └───.github
+│       ├───deep-is
+│       │   ├───example
+│       │   └───test
+│       ├───fast-levenshtein
+│       ├───levn
+│       │   └───lib
+│       ├───prelude-ls
+│       │   └───lib
+│       ├───type-check
+│       │   └───lib
+│       ├───word-wrap
+│       ├───forwarded
+│       ├───ipaddr.js
+│       │   └───lib
+│       ├───string_decoder
+│       │   └───lib
+│       ├───util-deprecate
+│       ├───is-regex
+│       │   └───test
+│       ├───has-tostringtag
+│       │   ├───test
+│       │   │   └───shams
+│       │   └───.github
+│       ├───has-flag
+│       ├───stream-events
+│       ├───stubs
+│       ├───media-typer
+│       ├───http-parser-js
+│       ├───websocket-extensions
+│       │   └───lib
+│       │       └───pipeline
+│       ├───tr46
+│       │   └───lib
+│       ├───cliui
+│       │   └───build
+│       │       └───lib
+│       ├───webidl-conversions
+│       │   └───lib
+│       ├───escalade
+│       │   ├───dist
+│       │   └───sync
+│       ├───get-caller-file
+│       ├───require-directory
+│       ├───string-width
+│       ├───y18n
+│       │   └───build
+│       │       └───lib
+│       │           └───platform-shims
+│       ├───yargs-parser
+│       │   └───build
+│       │       └───lib
+│       ├───strip-ansi
+│       ├───wrap-ansi
+│       ├───emoji-regex
+│       │   └───es2015
+│       ├───is-fullwidth-code-point
+│       ├───ansi-regex
+│       ├───@firebase
+│       │   ├───database-types
+│       │   ├───component
+│       │   │   └───dist
+│       │   │       ├───esm
+│       │   │       │   ├───src
+│       │   │       │   └───test
+│       │   │       ├───src
+│       │   │       └───test
+│       │   ├───logger
+│       │   │   └───dist
+│       │   │       ├───esm
+│       │   │       │   ├───test
+│       │   │       │   └───src
+│       │   │       ├───test
+│       │   │       └───src
+│       │   ├───util
+│       │   │   └───dist
+│       │   │       ├───node-esm
+│       │   │       │   ├───src
+│       │   │       │   └───test
+│       │   │       ├───src
+│       │   │       └───test
+│       │   ├───database
+│       │   │   └───dist
+│       │   │       ├───node-esm
+│       │   │       │   ├───src
+│       │   │       │   │   ├───core
+│       │   │       │   │   │   ├───operation
+│       │   │       │   │   │   ├───view
+│       │   │       │   │   │   │   └───filter
+│       │   │       │   │   │   ├───snap
+│       │   │       │   │   │   │   └───indexes
+│       │   │       │   │   │   ├───storage
+│       │   │       │   │   │   ├───util
+│       │   │       │   │   │   │   └───libs
+│       │   │       │   │   │   └───stats
+│       │   │       │   │   ├───realtime
+│       │   │       │   │   │   └───polling
+│       │   │       │   │   └───api
+│       │   │       │   └───test
+│       │   │       │       ├───helpers
+│       │   │       │       └───exp
+│       │   │       ├───src
+│       │   │       │   ├───core
+│       │   │       │   │   ├───operation
+│       │   │       │   │   ├───view
+│       │   │       │   │   │   └───filter
+│       │   │       │   │   ├───snap
+│       │   │       │   │   │   └───indexes
+│       │   │       │   │   ├───storage
+│       │   │       │   │   ├───util
+│       │   │       │   │   │   └───libs
+│       │   │       │   │   └───stats
+│       │   │       │   ├───realtime
+│       │   │       │   │   └───polling
+│       │   │       │   └───api
+│       │   │       └───test
+│       │   │           ├───helpers
+│       │   │           └───exp
+│       │   ├───auth-interop-types
+│       │   ├───app-types
+│       │   └───database-compat
+│       │       ├───dist
+│       │       │   ├───node-esm
+│       │       │   │   └───database-compat
+│       │       │   │       ├───test
+│       │       │   │       │   ├───browser
+│       │       │   │       │   └───helpers
+│       │       │   │       └───src
+│       │       │   │           ├───api
+│       │       │   │           └───util
+│       │       │   └───database-compat
+│       │       │       ├───test
+│       │       │       │   ├───browser
+│       │       │       │   └───helpers
+│       │       │       └───src
+│       │       │           ├───api
+│       │       │           └───util
+│       │       └───standalone
+│       ├───firebase-admin
+│       │   └───lib
+│       │       ├───auth
+│       │       ├───project-management
+│       │       ├───utils
+│       │       ├───app-check
+│       │       ├───messaging
+│       │       ├───eventarc
+│       │       ├───app
+│       │       ├───database
+│       │       ├───extensions
+│       │       ├───firestore
+│       │       ├───functions
+│       │       ├───credential
+│       │       ├───esm
+│       │       │   ├───app-check
+│       │       │   ├───app
+│       │       │   ├───auth
+│       │       │   ├───database
+│       │       │   ├───eventarc
+│       │       │   ├───extensions
+│       │       │   ├───firestore
+│       │       │   ├───functions
+│       │       │   ├───installations
+│       │       │   ├───instance-id
+│       │       │   ├───machine-learning
+│       │       │   ├───messaging
+│       │       │   ├───project-management
+│       │       │   ├───remote-config
+│       │       │   ├───security-rules
+│       │       │   └───storage
+│       │       ├───installations
+│       │       ├───instance-id
+│       │       ├───machine-learning
+│       │       ├───remote-config
+│       │       ├───security-rules
+│       │       └───storage
+│       ├───@google-cloud
+│       │   ├───projectify
+│       │   │   └───build
+│       │   │       └───src
+│       │   ├───paginator
+│       │   │   └───build
+│       │   │       └───src
+│       │   ├───promisify
+│       │   │   └───build
+│       │   │       └───src
+│       │   ├───firestore
+│       │   │   ├───build
+│       │   │   │   ├───src
+│       │   │   │   │   ├───v1
+│       │   │   │   │   └───v1beta1
+│       │   │   │   └───protos
+│       │   │   │       ├───google
+│       │   │   │       │   ├───firestore
+│       │   │   │       │   │   ├───v1
+│       │   │   │       │   │   ├───v1beta1
+│       │   │   │       │   │   └───admin
+│       │   │   │       │   │       └───v1
+│       │   │   │       │   ├───api
+│       │   │   │       │   ├───protobuf
+│       │   │   │       │   ├───type
+│       │   │   │       │   ├───longrunning
+│       │   │   │       │   └───rpc
+│       │   │   │       └───firestore
+│       │   │   └───types
+│       │   │       ├───v1
+│       │   │       ├───protos
+│       │   │       └───v1beta1
+│       │   └───storage
+│       │       ├───node_modules
+│       │       │   ├───uuid
+│       │       │   │   └───dist
+│       │       │   │       ├───bin
+│       │       │   │       ├───esm-browser
+│       │       │   │       ├───esm-node
+│       │       │   │       └───umd
+│       │       │   └───.bin
+│       │       └───build
+│       │           └───src
+│       │               └───nodejs-common
+│       ├───@types
+│       │   ├───cors
+│       │   ├───serve-static
+│       │   ├───connect
+│       │   ├───qs
+│       │   ├───body-parser
+│       │   ├───range-parser
+│       │   ├───send
+│       │   ├───mime
+│       │   ├───http-errors
+│       │   ├───rimraf
+│       │   ├───long
+│       │   ├───minimatch
+│       │   ├───glob
+│       │   ├───jsonwebtoken
+│       │   ├───ms
+│       │   ├───markdown-it
+│       │   │   ├───dist
+│       │   │   └───lib
+│       │   │       ├───common
+│       │   │       ├───helpers
+│       │   │       ├───rules_block
+│       │   │       ├───rules_core
+│       │   │       └───rules_inline
+│       │   ├───linkify-it
+│       │   │   └───build
+│       │   ├───mdurl
+│       │   │   ├───build
+│       │   │   └───lib
+│       │   ├───node
+│       │   │   ├───assert
+│       │   │   ├───compatibility
+│       │   │   ├───dns
+│       │   │   ├───fs
+│       │   │   ├───readline
+│       │   │   ├───stream
+│       │   │   ├───timers
+│       │   │   ├───ts5.6
+│       │   │   │   └───compatibility
+│       │   │   └───ts5.7
+│       │   │       └───compatibility
+│       │   ├───express
+│       │   └───express-serve-static-core
+│       ├───@grpc
+│       │   ├───proto-loader
+│       │   │   └───build
+│       │   │       ├───src
+│       │   │       └───bin
+│       │   └───grpc-js
+│       │       ├───build
+│       │       │   └───src
+│       │       │       └───generated
+│       │       │           ├───grpc
+│       │       │           │   └───channelz
+│       │       │           │       └───v1
+│       │       │           └───google
+│       │       │               └───protobuf
+│       │       ├───proto
+│       │       └───src
+│       │           └───generated
+│       │               ├───grpc
+│       │               │   └───channelz
+│       │               │       └───v1
+│       │               └───google
+│       │                   └───protobuf
+│       ├───@protobufjs
+│       │   ├───eventemitter
+│       │   │   └───tests
+│       │   ├───codegen
+│       │   │   └───tests
+│       │   ├───fetch
+│       │   │   └───tests
+│       │   ├───inquire
+│       │   │   └───tests
+│       │   │       └───data
+│       │   ├───path
+│       │   │   └───tests
+│       │   ├───base64
+│       │   │   └───tests
+│       │   ├───float
+│       │   │   ├───bench
+│       │   │   └───tests
+│       │   ├───pool
+│       │   │   └───tests
+│       │   ├───utf8
+│       │   │   └───tests
+│       │   │       └───data
+│       │   └───aspromise
+│       │       └───tests
+│       ├───@babel
+│       │   ├───types
+│       │   │   └───lib
+│       │   │       ├───asserts
+│       │   │       │   └───generated
+│       │   │       ├───ast-types
+│       │   │       │   └───generated
+│       │   │       ├───builders
+│       │   │       │   ├───flow
+│       │   │       │   ├───generated
+│       │   │       │   ├───react
+│       │   │       │   └───typescript
+│       │   │       ├───clone
+│       │   │       ├───comments
+│       │   │       ├───constants
+│       │   │       │   └───generated
+│       │   │       ├───converters
+│       │   │       ├───definitions
+│       │   │       ├───modifications
+│       │   │       │   ├───flow
+│       │   │       │   └───typescript
+│       │   │       ├───retrievers
+│       │   │       ├───traverse
+│       │   │       ├───utils
+│       │   │       │   └───react
+│       │   │       └───validators
+│       │   │           ├───generated
+│       │   │           └───react
+│       │   ├───helper-validator-identifier
+│       │   │   └───lib
+│       │   ├───helper-string-parser
+│       │   │   └───lib
+│       │   └───parser
+│       │       ├───bin
+│       │       ├───lib
+│       │       └───typings
+│       ├───@fastify
+│       │   └───busboy
+│       │       ├───deps
+│       │       │   ├───dicer
+│       │       │   │   └───lib
+│       │       │   └───streamsearch
+│       │       └───lib
+│       │           ├───utils
+│       │           └───types
+│       ├───jsonwebtoken
+│       │   ├───node_modules
+│       │   │   ├───jws
+│       │   │   │   └───lib
+│       │   │   ├───jwa
+│       │   │   └───ms
+│       │   └───lib
+│       ├───jwks-rsa
+│       │   ├───node_modules
+│       │   │   ├───@types
+│       │   │   ├───ms
+│       │   │   └───debug
+│       │   │       └───src
+│       │   └───src
+│       │       ├───errors
+│       │       ├───wrappers
+│       │       └───integrations
+│       ├───send
+│       │   └───node_modules
+│       │       ├───ms
+│       │       ├───encodeurl
+│       │       ├───mime
+│       │       │   └───src
+│       │       └───.bin
+│       ├───@jsdoc
+│       │   └───salty
+│       │       └───lib
+│       ├───@tootallnate
+│       │   └───once
+│       │       └───dist
+│       ├───retry-request
+│       │   └───node_modules
+│       │       ├───debug
+│       │       │   └───src
+│       │       └───ms
+│       ├───https-proxy-agent
+│       │   ├───node_modules
+│       │   │   ├───debug
+│       │   │   │   └───src
+│       │   │   └───ms
+│       │   └───dist
+│       ├───agent-base
+│       │   ├───node_modules
+│       │   │   ├───ms
+│       │   │   └───debug
+│       │   │       └───src
+│       │   ├───dist
+│       │   │   └───src
+│       │   └───src
+│       ├───http-proxy-agent
+│       │   ├───node_modules
+│       │   │   ├───debug
+│       │   │   │   └───src
+│       │   │   └───ms
+│       │   └───dist
+│       ├───google-gax
+│       │   ├───node_modules
+│       │   │   └───protobufjs
+│       │   │       ├───google
+│       │   │       │   ├───api
+│       │   │       │   └───protobuf
+│       │   │       ├───src
+│       │   │       │   ├───util
+│       │   │       │   └───rpc
+│       │   │       ├───ext
+│       │   │       │   ├───debug
+│       │   │       │   └───descriptor
+│       │   │       ├───scripts
+│       │   │       └───dist
+│       │   │           ├───light
+│       │   │           └───minimal
+│       │   └───build
+│       │       ├───src
+│       │       │   ├───bundlingCalls
+│       │       │   ├───longRunningCalls
+│       │       │   ├───normalCalls
+│       │       │   ├───paginationCalls
+│       │       │   └───streamingCalls
+│       │       ├───tools
+│       │       └───protos
+│       │           └───google
+│       │               ├───monitoring
+│       │               │   └───v3
+│       │               ├───api
+│       │               │   ├───apikeys
+│       │               │   │   └───v2
+│       │               │   ├───servicecontrol
+│       │               │   │   ├───v1
+│       │               │   │   └───v2
+│       │               │   ├───expr
+│       │               │   │   ├───v1alpha1
+│       │               │   │   ├───conformance
+│       │               │   │   │   └───v1alpha1
+│       │               │   │   └───v1beta1
+│       │               │   ├───servicemanagement
+│       │               │   │   └───v1
+│       │               │   └───serviceusage
+│       │               │       ├───v1
+│       │               │       └───v1beta1
+│       │               ├───protobuf
+│       │               │   ├───util
+│       │               │   ├───bridge
+│       │               │   └───compiler
+│       │               │       └───ruby
+│       │               ├───rpc
+│       │               │   └───context
+│       │               ├───iam
+│       │               │   └───v1
+│       │               │       └───logging
+│       │               ├───type
+│       │               ├───logging
+│       │               │   └───type
+│       │               ├───cloud
+│       │               │   └───location
+│       │               └───longrunning
+│       ├───mime-types
+│       │   └───node_modules
+│       │       └───mime-db
+│       ├───express
+│       │   ├───node_modules
+│       │   │   └───qs
+│       │   │       ├───test
+│       │   │       ├───lib
+│       │   │       ├───dist
+│       │   │       └───.github
+│       │   └───lib
+│       │       ├───router
+│       │       └───middleware
+│       ├───body-parser
+│       │   ├───node_modules
+│       │   │   └───qs
+│       │   │       ├───test
+│       │   │       ├───lib
+│       │   │       ├───dist
+│       │   │       └───.github
+│       │   └───lib
+│       │       └───types
+│       ├───escodegen
+│       │   ├───node_modules
+│       │   │   └───estraverse
+│       │   └───bin
+│       ├───.bin
+│       ├───firebase-functions
+│       │   ├───lib
+│       │   │   ├───v2
+│       │   │   │   └───providers
+│       │   │   │       └───alerts
+│       │   │   ├───v1
+│       │   │   │   └───providers
+│       │   │   ├───common
+│       │   │   │   ├───providers
+│       │   │   │   └───utilities
+│       │   │   ├───logger
+│       │   │   ├───bin
+│       │   │   ├───params
+│       │   │   └───runtime
+│       │   └───protos
+│       └───dotenv
+│           └───lib
+├───public_html
+├───tools
+│   └───fcm-sender
+│       └───node_modules
+│           ├───@firebase
+│           │   ├───component
+│           │   │   └───dist
+│           │   │       ├───esm
+│           │   │       │   ├───src
+│           │   │       │   └───test
+│           │   │       ├───src
+│           │   │       └───test
+│           │   ├───database
+│           │   │   └───dist
+│           │   │       ├───node-esm
+│           │   │       │   ├───src
+│           │   │       │   │   ├───core
+│           │   │       │   │   │   ├───operation
+│           │   │       │   │   │   ├───view
+│           │   │       │   │   │   │   └───filter
+│           │   │       │   │   │   ├───snap
+│           │   │       │   │   │   │   └───indexes
+│           │   │       │   │   │   ├───storage
+│           │   │       │   │   │   ├───util
+│           │   │       │   │   │   │   └───libs
+│           │   │       │   │   │   └───stats
+│           │   │       │   │   ├───realtime
+│           │   │       │   │   │   └───polling
+│           │   │       │   │   ├───api
+│           │   │       │   │   └───internal
+│           │   │       │   └───test
+│           │   │       │       └───helpers
+│           │   │       ├───src
+│           │   │       │   ├───core
+│           │   │       │   │   ├───operation
+│           │   │       │   │   ├───view
+│           │   │       │   │   │   └───filter
+│           │   │       │   │   ├───snap
+│           │   │       │   │   │   └───indexes
+│           │   │       │   │   ├───storage
+│           │   │       │   │   ├───util
+│           │   │       │   │   │   └───libs
+│           │   │       │   │   └───stats
+│           │   │       │   ├───realtime
+│           │   │       │   │   └───polling
+│           │   │       │   ├───api
+│           │   │       │   └───internal
+│           │   │       └───test
+│           │   │           └───helpers
+│           │   ├───logger
+│           │   │   └───dist
+│           │   │       ├───esm
+│           │   │       │   ├───test
+│           │   │       │   └───src
+│           │   │       ├───test
+│           │   │       └───src
+│           │   ├───util
+│           │   │   └───dist
+│           │   │       ├───node-esm
+│           │   │       │   ├───src
+│           │   │       │   └───test
+│           │   │       ├───src
+│           │   │       └───test
+│           │   ├───app-check-interop-types
+│           │   ├───auth-interop-types
+│           │   ├───app-types
+│           │   ├───database-compat
+│           │   │   ├───dist
+│           │   │   │   ├───node-esm
+│           │   │   │   │   └───database-compat
+│           │   │   │   │       ├───test
+│           │   │   │   │       │   ├───browser
+│           │   │   │   │       │   └───helpers
+│           │   │   │   │       └───src
+│           │   │   │   │           ├───api
+│           │   │   │   │           └───util
+│           │   │   │   └───database-compat
+│           │   │   │       ├───test
+│           │   │   │       │   ├───browser
+│           │   │   │       │   └───helpers
+│           │   │   │       └───src
+│           │   │   │           ├───api
+│           │   │   │           └───util
+│           │   │   └───standalone
+│           │   └───database-types
+│           ├───@google-cloud
+│           │   ├───paginator
+│           │   │   └───build
+│           │   │       └───src
+│           │   ├───projectify
+│           │   │   └───build
+│           │   │       └───src
+│           │   ├───promisify
+│           │   │   └───build
+│           │   │       └───src
+│           │   ├───storage
+│           │   │   ├───node_modules
+│           │   │   │   ├───uuid
+│           │   │   │   │   └───dist
+│           │   │   │   │       ├───bin
+│           │   │   │   │       ├───esm-browser
+│           │   │   │   │       ├───esm-node
+│           │   │   │   │       └───umd
+│           │   │   │   └───.bin
+│           │   │   └───build
+│           │   │       ├───cjs
+│           │   │       │   └───src
+│           │   │       │       └───nodejs-common
+│           │   │       └───esm
+│           │   │           └───src
+│           │   │               └───nodejs-common
+│           │   └───firestore
+│           │       ├───build
+│           │       │   ├───src
+│           │       │   │   ├───reference
+│           │       │   │   ├───telemetry
+│           │       │   │   ├───v1
+│           │       │   │   └───v1beta1
+│           │       │   └───protos
+│           │       │       ├───google
+│           │       │       │   ├───firestore
+│           │       │       │   │   ├───v1
+│           │       │       │   │   ├───admin
+│           │       │       │   │   │   └───v1
+│           │       │       │   │   └───v1beta1
+│           │       │       │   ├───api
+│           │       │       │   ├───protobuf
+│           │       │       │   ├───type
+│           │       │       │   ├───longrunning
+│           │       │       │   └───rpc
+│           │       │       └───firestore
+│           │       └───types
+│           │           ├───v1
+│           │           ├───protos
+│           │           └───v1beta1
+│           ├───@grpc
+│           │   ├───proto-loader
+│           │   │   └───build
+│           │   │       ├───src
+│           │   │       └───bin
+│           │   └───grpc-js
+│           │       ├───build
+│           │       │   └───src
+│           │       │       └───generated
+│           │       │           ├───grpc
+│           │       │           │   └───channelz
+│           │       │           │       └───v1
+│           │       │           └───google
+│           │       │               └───protobuf
+│           │       ├───proto
+│           │       └───src
+│           │           └───generated
+│           │               ├───grpc
+│           │               │   └───channelz
+│           │               │       └───v1
+│           │               └───google
+│           │                   └───protobuf
+│           ├───@types
+│           │   ├───long
+│           │   ├───express
+│           │   ├───jsonwebtoken
+│           │   ├───body-parser
+│           │   ├───qs
+│           │   ├───express-serve-static-core
+│           │   ├───range-parser
+│           │   ├───serve-static
+│           │   ├───connect
+│           │   ├───send
+│           │   ├───ms
+│           │   ├───mime
+│           │   ├───http-errors
+│           │   ├───request
+│           │   ├───caseless
+│           │   ├───tough-cookie
+│           │   └───node
+│           │       ├───assert
+│           │       ├───compatibility
+│           │       ├───dns
+│           │       ├───fs
+│           │       ├───readline
+│           │       ├───stream
+│           │       ├───timers
+│           │       └───ts5.6
+│           ├───@protobufjs
+│           │   ├───base64
+│           │   │   └───tests
+│           │   ├───codegen
+│           │   │   └───tests
+│           │   ├───fetch
+│           │   │   └───tests
+│           │   ├───eventemitter
+│           │   │   └───tests
+│           │   ├───inquire
+│           │   │   └───tests
+│           │   │       └───data
+│           │   ├───float
+│           │   │   ├───bench
+│           │   │   └───tests
+│           │   ├───path
+│           │   │   └───tests
+│           │   ├───pool
+│           │   │   └───tests
+│           │   ├───utf8
+│           │   │   └───tests
+│           │   │       └───data
+│           │   └───aspromise
+│           │       └───tests
+│           ├───@fastify
+│           │   └───busboy
+│           │       ├───deps
+│           │       │   ├───dicer
+│           │       │   │   └───lib
+│           │       │   └───streamsearch
+│           │       └───lib
+│           │           ├───utils
+│           │           └───types
+│           ├───farmhash-modern
+│           │   ├───lib
+│           │   └───bin
+│           │       ├───bundler
+│           │       └───nodejs
+│           ├───@opentelemetry
+│           │   └───api
+│           │       └───build
+│           │           ├───esm
+│           │           │   ├───common
+│           │           │   ├───trace
+│           │           │   │   └───internal
+│           │           │   ├───baggage
+│           │           │   │   └───internal
+│           │           │   ├───diag
+│           │           │   │   └───internal
+│           │           │   ├───api
+│           │           │   ├───context
+│           │           │   ├───internal
+│           │           │   ├───platform
+│           │           │   │   ├───browser
+│           │           │   │   └───node
+│           │           │   ├───experimental
+│           │           │   │   └───trace
+│           │           │   ├───metrics
+│           │           │   └───propagation
+│           │           ├───esnext
+│           │           │   ├───common
+│           │           │   ├───trace
+│           │           │   │   └───internal
+│           │           │   ├───baggage
+│           │           │   │   └───internal
+│           │           │   ├───diag
+│           │           │   │   └───internal
+│           │           │   ├───api
+│           │           │   ├───context
+│           │           │   ├───internal
+│           │           │   ├───platform
+│           │           │   │   ├───browser
+│           │           │   │   └───node
+│           │           │   ├───experimental
+│           │           │   │   └───trace
+│           │           │   ├───metrics
+│           │           │   └───propagation
+│           │           └───src
+│           │               ├───common
+│           │               ├───trace
+│           │               │   └───internal
+│           │               ├───baggage
+│           │               │   └───internal
+│           │               ├───diag
+│           │               │   └───internal
+│           │               ├───api
+│           │               ├───context
+│           │               ├───internal
+│           │               ├───platform
+│           │               │   ├───browser
+│           │               │   └───node
+│           │               ├───experimental
+│           │               │   └───trace
+│           │               ├───metrics
+│           │               └───propagation
+│           ├───teeny-request
+│           │   ├───node_modules
+│           │   │   ├───agent-base
+│           │   │   │   ├───dist
+│           │   │   │   │   └───src
+│           │   │   │   └───src
+│           │   │   ├───https-proxy-agent
+│           │   │   │   └───dist
+│           │   │   ├───uuid
+│           │   │   │   └───dist
+│           │   │   │       ├───bin
+│           │   │   │       ├───commonjs-browser
+│           │   │   │       ├───esm-browser
+│           │   │   │       └───esm-node
+│           │   │   └───.bin
+│           │   └───build
+│           │       └───src
+│           ├───@js-sdsl
+│           │   └───ordered-map
+│           │       └───dist
+│           │           ├───cjs
+│           │           ├───esm
+│           │           └───umd
+│           ├───@tootallnate
+│           │   └───once
+│           │       └───dist
+│           ├───jsonwebtoken
+│           │   ├───node_modules
+│           │   │   ├───jws
+│           │   │   │   └───lib
+│           │   │   └───jwa
+│           │   └───lib
+│           ├───google-auth-library
+│           │   └───build
+│           │       └───src
+│           │           ├───auth
+│           │           └───crypto
+│           │               ├───browser
+│           │               └───node
+│           ├───jwks-rsa
+│           │   └───src
+│           │       ├───errors
+│           │       ├───wrappers
+│           │       └───integrations
+│           ├───node-forge
+│           │   ├───lib
+│           │   ├───dist
+│           │   └───flash
+│           │       └───swf
+│           ├───uuid
+│           │   └───dist
+│           │       ├───esm
+│           │       │   └───bin
+│           │       ├───cjs-browser
+│           │       ├───cjs
+│           │       └───esm-browser
+│           ├───tslib
+│           │   └───modules
+│           ├───faye-websocket
+│           │   └───lib
+│           │       └───faye
+│           │           └───websocket
+│           │               └───api
+│           ├───fast-deep-equal
+│           │   └───es6
+│           ├───protobufjs
+│           │   ├───google
+│           │   │   ├───api
+│           │   │   └───protobuf
+│           │   ├───src
+│           │   │   ├───util
+│           │   │   └───rpc
+│           │   ├───ext
+│           │   │   ├───debug
+│           │   │   └───descriptor
+│           │   ├───scripts
+│           │   └───dist
+│           │       ├───light
+│           │       └───minimal
+│           ├───functional-red-black-tree
+│           │   ├───bench
+│           │   └───test
+│           ├───abort-controller
+│           │   └───dist
+│           ├───async-retry
+│           │   └───lib
+│           ├───duplexify
+│           ├───fast-xml-parser
+│           │   └───src
+│           │       ├───v5
+│           │       │   ├───OutputBuilders
+│           │       │   ├───valueParsers
+│           │       │   └───inputSource
+│           │       ├───v6
+│           │       │   ├───OutputBuilders
+│           │       │   ├───valueParsers
+│           │       │   └───inputSource
+│           │       ├───cli
+│           │       ├───xmlparser
+│           │       └───xmlbuilder
+│           ├───html-entities
+│           │   ├───dist
+│           │   │   ├───commonjs
+│           │   │   └───esm
+│           │   └───src
+│           ├───retry-request
+│           ├───mime
+│           │   └───types
+│           ├───p-limit
+│           ├───arrify
+│           ├───extend
+│           ├───event-target-shim
+│           │   └───dist
+│           ├───undici-types
+│           ├───retry
+│           │   ├───example
+│           │   └───lib
+│           ├───end-of-stream
+│           ├───readable-stream
+│           │   └───lib
+│           │       └───internal
+│           │           └───streams
+│           ├───inherits
+│           ├───once
+│           ├───stream-shift
+│           │   └───.github
+│           │       └───workflows
+│           ├───strnum
+│           │   └───.vscode
+│           ├───websocket-driver
+│           │   └───lib
+│           │       └───websocket
+│           │           └───driver
+│           │               └───hybi
+│           ├───https-proxy-agent
+│           │   └───dist
+│           ├───is-stream
+│           ├───base64-js
+│           ├───node-fetch
+│           │   └───lib
+│           ├───ecdsa-sig-formatter
+│           │   └───src
+│           ├───gcp-metadata
+│           │   └───build
+│           │       └───src
+│           ├───gtoken
+│           │   └───build
+│           │       └───src
+│           ├───safe-buffer
+│           ├───jws
+│           │   └───lib
+│           ├───google-logging-utils
+│           │   └───build
+│           │       └───src
+│           ├───object-hash
+│           │   └───dist
+│           ├───json-bigint
+│           │   └───lib
+│           ├───proto3-json-serializer
+│           │   └───build
+│           │       └───src
+│           ├───lodash.camelcase
+│           ├───yargs
+│           │   ├───build
+│           │   │   └───lib
+│           │   │       ├───utils
+│           │   │       └───typings
+│           │   ├───helpers
+│           │   ├───locales
+│           │   └───lib
+│           │       └───platform-shims
+│           ├───long
+│           │   └───umd
+│           ├───agent-base
+│           │   └───dist
+│           ├───bignumber.js
+│           │   └───doc
+│           ├───ms
+│           ├───debug
+│           │   └───src
+│           ├───lodash.includes
+│           ├───lodash.isboolean
+│           ├───lodash.isinteger
+│           ├───lodash.isnumber
+│           ├───lodash.isplainobject
+│           ├───lodash.isstring
+│           ├───lodash.once
+│           ├───semver
+│           │   ├───functions
+│           │   ├───classes
+│           │   ├───internal
+│           │   ├───ranges
+│           │   └───bin
+│           ├───jose
+│           │   └───dist
+│           │       ├───browser
+│           │       │   ├───lib
+│           │       │   ├───runtime
+│           │       │   ├───util
+│           │       │   ├───jwe
+│           │       │   │   ├───compact
+│           │       │   │   ├───flattened
+│           │       │   │   └───general
+│           │       │   ├───jwt
+│           │       │   ├───jwk
+│           │       │   ├───key
+│           │       │   ├───jwks
+│           │       │   └───jws
+│           │       │       ├───compact
+│           │       │       ├───flattened
+│           │       │       └───general
+│           │       ├───node
+│           │       │   ├───cjs
+│           │       │   │   ├───lib
+│           │       │   │   ├───runtime
+│           │       │   │   ├───util
+│           │       │   │   ├───jwe
+│           │       │   │   │   ├───compact
+│           │       │   │   │   ├───flattened
+│           │       │   │   │   └───general
+│           │       │   │   ├───jwt
+│           │       │   │   ├───jwk
+│           │       │   │   ├───key
+│           │       │   │   ├───jwks
+│           │       │   │   └───jws
+│           │       │   │       ├───compact
+│           │       │   │       ├───flattened
+│           │       │   │       └───general
+│           │       │   └───esm
+│           │       │       ├───lib
+│           │       │       ├───runtime
+│           │       │       ├───util
+│           │       │       ├───jwe
+│           │       │       │   ├───compact
+│           │       │       │   ├───flattened
+│           │       │       │   └───general
+│           │       │       ├───jwt
+│           │       │       ├───jwk
+│           │       │       ├───key
+│           │       │       ├───jwks
+│           │       │       └───jws
+│           │       │           ├───compact
+│           │       │           ├───flattened
+│           │       │           └───general
+│           │       └───types
+│           │           ├───util
+│           │           ├───jwe
+│           │           │   ├───compact
+│           │           │   ├───flattened
+│           │           │   └───general
+│           │           ├───jwt
+│           │           ├───jwk
+│           │           ├───key
+│           │           ├───jwks
+│           │           └───jws
+│           │               ├───compact
+│           │               ├───flattened
+│           │               └───general
+│           ├───limiter
+│           │   ├───lib
+│           │   └───test
+│           ├───lru-memoizer
+│           │   ├───lib
+│           │   └───test
+│           ├───jwa
+│           ├───buffer-equal-constant-time
+│           ├───lru-cache
+│           ├───lodash.clonedeep
+│           ├───yallist
+│           ├───whatwg-url
+│           │   └───lib
+│           ├───wrappy
+│           ├───yocto-queue
+│           ├───string_decoder
+│           │   └───lib
+│           ├───util-deprecate
+│           ├───asynckit
+│           │   └───lib
+│           ├───form-data
+│           │   └───lib
+│           ├───es-set-tostringtag
+│           │   └───test
+│           ├───combined-stream
+│           │   └───lib
+│           ├───hasown
+│           │   └───.github
+│           ├───mime-types
+│           ├───get-intrinsic
+│           │   ├───test
+│           │   └───.github
+│           ├───es-errors
+│           │   ├───test
+│           │   └───.github
+│           ├───has-tostringtag
+│           │   ├───test
+│           │   │   └───shams
+│           │   └───.github
+│           ├───call-bind-apply-helpers
+│           │   ├───test
+│           │   └───.github
+│           ├───delayed-stream
+│           │   └───lib
+│           ├───es-object-atoms
+│           │   ├───test
+│           │   └───.github
+│           ├───es-define-property
+│           │   ├───test
+│           │   └───.github
+│           ├───function-bind
+│           │   ├───test
+│           │   └───.github
+│           ├───get-proto
+│           │   ├───test
+│           │   └───.github
+│           ├───gopd
+│           │   ├───test
+│           │   └───.github
+│           ├───has-symbols
+│           │   ├───test
+│           │   │   └───shams
+│           │   └───.github
+│           ├───math-intrinsics
+│           │   ├───test
+│           │   ├───constants
+│           │   └───.github
+│           ├───dunder-proto
+│           │   ├───test
+│           │   └───.github
+│           ├───mime-db
+│           ├───stream-events
+│           ├───http-parser-js
+│           ├───stubs
+│           ├───websocket-extensions
+│           │   └───lib
+│           │       └───pipeline
+│           ├───tr46
+│           │   └───lib
+│           ├───webidl-conversions
+│           │   └───lib
+│           ├───cliui
+│           │   └───build
+│           │       └───lib
+│           ├───escalade
+│           │   ├───dist
+│           │   └───sync
+│           ├───get-caller-file
+│           ├───require-directory
+│           ├───y18n
+│           │   └───build
+│           │       └───lib
+│           │           └───platform-shims
+│           ├───string-width
+│           ├───strip-ansi
+│           ├───yargs-parser
+│           │   └───build
+│           │       └───lib
+│           ├───wrap-ansi
+│           ├───emoji-regex
+│           │   └───es2015
+│           ├───is-fullwidth-code-point
+│           ├───ansi-styles
+│           ├───ansi-regex
+│           ├───color-convert
+│           ├───color-name
+│           ├───firebase-admin
+│           │   └───lib
+│           │       ├───auth
+│           │       ├───project-management
+│           │       ├───utils
+│           │       ├───app-check
+│           │       ├───eventarc
+│           │       ├───remote-config
+│           │       │   └───internal
+│           │       ├───app
+│           │       ├───data-connect
+│           │       ├───database
+│           │       ├───extensions
+│           │       ├───firestore
+│           │       ├───functions
+│           │       ├───credential
+│           │       ├───esm
+│           │       │   ├───app-check
+│           │       │   ├───app
+│           │       │   ├───auth
+│           │       │   ├───data-connect
+│           │       │   ├───database
+│           │       │   ├───eventarc
+│           │       │   ├───extensions
+│           │       │   ├───firestore
+│           │       │   ├───functions
+│           │       │   ├───installations
+│           │       │   ├───instance-id
+│           │       │   ├───machine-learning
+│           │       │   ├───messaging
+│           │       │   ├───project-management
+│           │       │   ├───remote-config
+│           │       │   ├───security-rules
+│           │       │   └───storage
+│           │       ├───installations
+│           │       ├───instance-id
+│           │       ├───machine-learning
+│           │       ├───messaging
+│           │       ├───security-rules
+│           │       └───storage
+│           ├───google-gax
+│           │   ├───node_modules
+│           │   │   ├───uuid
+│           │   │   │   └───dist
+│           │   │   │       ├───bin
+│           │   │   │       ├───commonjs-browser
+│           │   │   │       ├───esm-browser
+│           │   │   │       └───esm-node
+│           │   │   └───.bin
+│           │   └───build
+│           │       ├───src
+│           │       │   ├───bundlingCalls
+│           │       │   ├───longRunningCalls
+│           │       │   ├───normalCalls
+│           │       │   ├───paginationCalls
+│           │       │   └───streamingCalls
+│           │       └───protos
+│           │           └───google
+│           │               ├───monitoring
+│           │               │   └───v3
+│           │               ├───api
+│           │               │   ├───apikeys
+│           │               │   │   └───v2
+│           │               │   ├───servicecontrol
+│           │               │   │   ├───v1
+│           │               │   │   └───v2
+│           │               │   ├───expr
+│           │               │   │   ├───v1alpha1
+│           │               │   │   ├───conformance
+│           │               │   │   │   └───v1alpha1
+│           │               │   │   └───v1beta1
+│           │               │   ├───cloudquotas
+│           │               │   │   └───v1
+│           │               │   ├───servicemanagement
+│           │               │   │   └───v1
+│           │               │   └───serviceusage
+│           │               │       ├───v1
+│           │               │       └───v1beta1
+│           │               ├───protobuf
+│           │               │   ├───editions
+│           │               │   │   ├───golden
+│           │               │   │   ├───proto
+│           │               │   │   └───codegen_tests
+│           │               │   ├───util
+│           │               │   ├───bridge
+│           │               │   └───compiler
+│           │               │       └───ruby
+│           │               ├───rpc
+│           │               │   └───context
+│           │               ├───iam
+│           │               │   └───v1
+│           │               │       └───logging
+│           │               ├───type
+│           │               ├───logging
+│           │               │   └───type
+│           │               ├───cloud
+│           │               │   └───location
+│           │               └───longrunning
+│           ├───gaxios
+│           │   ├───node_modules
+│           │   │   ├───uuid
+│           │   │   │   └───dist
+│           │   │   │       ├───bin
+│           │   │   │       ├───commonjs-browser
+│           │   │   │       ├───esm-browser
+│           │   │   │       └───esm-node
+│           │   │   └───.bin
+│           │   └───build
+│           │       └───src
+│           ├───http-proxy-agent
+│           │   ├───node_modules
+│           │   │   └───agent-base
+│           │   │       ├───dist
+│           │   │       │   └───src
+│           │   │       └───src
+│           │   └───dist
+│           └───.bin
+├───keystore
+├───flashmeet-hosting
+├───.well-known
+└───.firebase

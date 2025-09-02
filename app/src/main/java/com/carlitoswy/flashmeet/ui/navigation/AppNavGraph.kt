@@ -21,7 +21,6 @@ import com.carlitoswy.flashmeet.presentation.event.EditEventScreen
 import com.carlitoswy.flashmeet.presentation.event.EventDeepLinkScreen
 import com.carlitoswy.flashmeet.presentation.event.EventDetailScreen
 import com.carlitoswy.flashmeet.presentation.event.FavoritesScreen
-import com.carlitoswy.flashmeet.presentation.event.MyEventsScreen
 import com.carlitoswy.flashmeet.presentation.event.SearchScreen
 import com.carlitoswy.flashmeet.presentation.flyer.CreateFlyerScreen
 import com.carlitoswy.flashmeet.presentation.flyer.FlyerEditorViewModel
@@ -29,8 +28,10 @@ import com.carlitoswy.flashmeet.presentation.flyer.FlyerListScreen
 import com.carlitoswy.flashmeet.presentation.home.HomeScreen
 import com.carlitoswy.flashmeet.presentation.location.LocationPermissionScreen
 import com.carlitoswy.flashmeet.presentation.map.MapScreen
+import com.carlitoswy.flashmeet.presentation.myevents.MyEventsScreen
 import com.carlitoswy.flashmeet.presentation.onboarding.OnboardingScreen
 import com.carlitoswy.flashmeet.presentation.payment.StripePaymentScreen
+import com.carlitoswy.flashmeet.presentation.search.EventSearchScreen
 import com.carlitoswy.flashmeet.presentation.welcome.WelcomeScreen
 import com.carlitoswy.flashmeet.ui.screens.CameraCaptureScreen
 import com.carlitoswy.flashmeet.ui.screens.EmailLoginScreen
@@ -118,8 +119,13 @@ fun AppNavGraph(
         }
 
         // ✅ Eventos
-        composable(Routes.CREATE_EVENT) { CreateEventScreen(navController) { navController.popBackStack() } }
-        composable(Routes.MY_EVENTS) { MyEventsScreen(navController) }
+        // ✨ CORRECCIÓN: Llamada a CreateEventScreenV2 sin el parámetro 'function'
+        composable(Routes.CREATE_EVENT) {
+            CreateEventScreen(navController = navController)
+        }
+
+        composable(Routes.MY_EVENTS) { MyEventsScreen() }
+
         composable(Routes.FAVORITES) { FavoritesScreen(navController) }
 
         composable(
@@ -127,6 +133,10 @@ fun AppNavGraph(
             arguments = listOf(navArgument("eventId") { type = NavType.StringType })
         ) {
             EventDetailScreen(navController, it.arguments?.getString("eventId") ?: "")
+        }
+
+        composable(route = Routes.SEARCH_NEARBY) {
+            EventSearchScreen()
         }
 
         composable(
@@ -138,33 +148,48 @@ fun AppNavGraph(
 
         // ✅ Deeplinks → cargar evento y redirigir a HOME con foco
         composable(
-            route = Routes.EVENT,
+            route = Routes.EVENT, // p.ej. "event/{eventId}"
             arguments = listOf(
-                navArgument("eventId") { type = NavType.StringType }
-                // Si algún día quieres lat/lon como query, puedes añadir:
-                // navArgument("lat") { type = NavType.StringType; nullable = true; defaultValue = null },
-                // navArgument("lon") { type = NavType.StringType; nullable = true; defaultValue = null }
+                navArgument("eventId") { type = NavType.StringType },
+                navArgument("lat") { type = NavType.StringType; nullable = true; defaultValue = null },
+                navArgument("lon") { type = NavType.StringType; nullable = true; defaultValue = null }
             ),
             deepLinks = listOf(
-                // --- HTTPS dominio principal ---
-                navDeepLink { uriPattern = "https://flashmeet.app/event/{eventId}" },
-                navDeepLink { uriPattern = "https://flashmeet.app/e/{eventId}" },
+                // --- PROD: 123myway.com ---
+                navDeepLink { uriPattern = "https://123myway.com/event/{eventId}" },
+                navDeepLink { uriPattern = "https://123myway.com/e/{eventId}" },
+                navDeepLink { uriPattern = "https://www.123myway.com/event/{eventId}" },
+                navDeepLink { uriPattern = "https://www.123myway.com/e/{eventId}" },
 
-                // --- HTTPS con www (🆕 añadido) ---
-                navDeepLink { uriPattern = "https://www.flashmeet.app/event/{eventId}" },
-                navDeepLink { uriPattern = "https://www.flashmeet.app/e/{eventId}" },
+                // Con query params (opcionales)
+                navDeepLink { uriPattern = "https://123myway.com/event/{eventId}?lat={lat}&lon={lon}" },
+                navDeepLink { uriPattern = "https://123myway.com/e/{eventId}?lat={lat}&lon={lon}" },
+                navDeepLink { uriPattern = "https://www.123myway.com/event/{eventId}?lat={lat}&lon={lon}" },
+                navDeepLink { uriPattern = "https://www.123myway.com/e/{eventId}?lat={lat}&lon={lon}" },
 
-                // --- Esquema personalizado (fallback/testing) ---
+                // --- STAGING: Vercel (opcional) ---
+                navDeepLink { uriPattern = "https://flashmeet-web.vercel.app/event/{eventId}" },
+                navDeepLink { uriPattern = "https://flashmeet-web.vercel.app/e/{eventId}" },
+                navDeepLink { uriPattern = "https://flashmeet-web.vercel.app/event/{eventId}?lat={lat}&lon={lon}" },
+                navDeepLink { uriPattern = "https://flashmeet-web.vercel.app/e/{eventId}?lat={lat}&lon={lon}" },
+
+                // --- Fallback/testing ---
                 navDeepLink { uriPattern = "flashmeet://event/{eventId}" }
             )
         ) { backStackEntry ->
             val eventId = backStackEntry.arguments?.getString("eventId") ?: return@composable
+            val lat = backStackEntry.arguments?.getString("lat")?.toDoubleOrNull()
+            val lon = backStackEntry.arguments?.getString("lon")?.toDoubleOrNull()
+
             EventDeepLinkScreen(
                 eventId = eventId,
                 navController = navController,
+                lat = lat,
+                lon = lon,
                 onClose = { navController.popBackStack() }
             )
         }
+
 
         // ✅ Flyers
         composable(Routes.FLYER_LIST) { FlyerListScreen(navController) }

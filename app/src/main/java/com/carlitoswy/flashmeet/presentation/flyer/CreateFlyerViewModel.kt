@@ -12,6 +12,7 @@ import com.carlitoswy.flashmeet.domain.model.Flyer
 import com.carlitoswy.flashmeet.utils.await
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.GeoPoint
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,7 +25,7 @@ import javax.inject.Inject
 class CreateFlyerViewModel @Inject constructor(
     private val firestore: FirebaseFirestore,
     private val locationService: LocationService,
-    private val sharedFlyerPaymentRepository: SharedFlyerPaymentRepository // <-- ¡NUEVA INYECCIÓN!
+    private val sharedFlyerPaymentRepository: SharedFlyerPaymentRepository
 ) : ViewModel() {
 
     private val _isLoading = MutableStateFlow(false)
@@ -35,6 +36,10 @@ class CreateFlyerViewModel @Inject constructor(
 
     private val _currentLocation = MutableStateFlow<GeoPoint?>(null)
     val currentLocation: StateFlow<GeoPoint?> = _currentLocation
+
+    // 🔹 ID del borrador que se crea al entrar a la pantalla y se va mergeando
+    private val _draftId = MutableStateFlow<String?>(null)
+    val draftId: StateFlow<String?> = _draftId
 
     private val storage = FirebaseStorage.getInstance().reference
 
@@ -53,8 +58,73 @@ class CreateFlyerViewModel @Inject constructor(
         AdOption.BANNER -> "$7"
     }
 
+    // Helper to compute price in cents
+    private fun getPriceInCents(adOption: AdOption): Long = when (adOption) {
+        AdOption.NONE -> 0L
+        AdOption.HIGHLIGHTED -> 500L
+        AdOption.PROMOTED -> 1000L
+        AdOption.BANNER -> 700L
+    }
+
     /**
-     * Guarda el flyer directamente en Firestore y Storage (para flyers sin pago o después de pago).
+     * Crea (si no existe) un documento borrador en /flyers/{draftId} para mostrar en tiempo real.
+     * Llamar al entrar a la pantalla de creación.
+     */
+    fun beginDraft(createdBy: String, locationLabel: String) {
+        if (_draftId.value != null) return
+        val id = UUID.randomUUID().toString()
+        _draftId.value = id
+
+        viewModelScope.launch {
+            try {
+                val location = currentLocation.value ?: GeoPoint(0.0, 0.0)
+                val draft = Flyer(
+                    id = id,
+                    title = "",
+                    description = "",
+                    imageUrl = "",
+                    createdBy = createdBy,
+                    timestamp = System.currentTimeMillis(),
+                    location = location,
+                    bgColor = 0,
+                    fontName = "Sans",
+                    adOption = AdOption.NONE.name,
+                    highlightedText = "",
+                    eventId = id,
+                    priceCents = getPriceInCents(AdOption.NONE),
+                    ownerId = createdBy,
+                    dateMillis = System.currentTimeMillis(),
+                    city = locationLabel
+                )
+                firestore.collection("flyers").document(id)
+                    .set(draft, SetOptions.merge())
+                    .await()
+            } catch (e: Exception) {
+                Log.w("CreateFlyerVM", "No se pudo crear draft: ${e.localizedMessage}")
+            }
+        }
+    }
+
+    /**
+     * Actualiza parcialmente el borrador (merge).
+     */
+    fun updateDraft(fields: Map<String, Any?>) {
+        val id = _draftId.value ?: return
+        viewModelScope.launch {
+            try {
+                val patch = fields.filterValues { it != null }
+                if (patch.isNotEmpty()) {
+                    firestore.collection("flyers").document(id)
+                        .set(patch, SetOptions.merge())
+                        .await()
+                }
+            } catch (_: Exception) { }
+        }
+    }
+
+    /**
+     * Crea y guarda el flyer inmediatamente (flujo SIN pago).
+     * Reutiliza el draftId si existe para que el documento no cambie.
      */
     fun createFlyer(
         title: String,
@@ -73,13 +143,13 @@ class CreateFlyerViewModel @Inject constructor(
             _errorMessage.value = null
 
             try {
-                val id = UUID.randomUUID().toString()
+                val id = _draftId.value ?: UUID.randomUUID().toString()
                 val location = currentLocation.value ?: GeoPoint(0.0, 0.0)
+                val priceInCents = getPriceInCents(adOption)
 
                 var imageUrl = ""
                 imageUri?.let {
                     val fileRef = storage.child("flyers/$id.jpg")
-                    // .await() es una función de extensión que convierte Tasks a suspend functions
                     fileRef.putFile(it).await()
                     imageUrl = fileRef.downloadUrl.await().toString()
                 }
@@ -95,10 +165,16 @@ class CreateFlyerViewModel @Inject constructor(
                     bgColor = bgColor,
                     fontName = fontName,
                     adOption = adOption.name,
-                    highlightedText = highlightedText
+                    highlightedText = highlightedText,
+                    eventId = id,
+                    priceCents = priceInCents,
+                    ownerId = createdBy,
+                    dateMillis = System.currentTimeMillis(),
+                    city = locationLabel
                 )
 
                 firestore.collection("flyers").document(id).set(flyer).await()
+                _draftId.value = null
                 onSuccess()
             } catch (e: Exception) {
                 _errorMessage.value = e.localizedMessage
@@ -109,8 +185,8 @@ class CreateFlyerViewModel @Inject constructor(
     }
 
     /**
-     * Guarda los datos de un flyer de forma temporal en el SharedFlyerPaymentRepository.
-     * Esto se usa cuando el flyer requiere pago y necesita ser finalizado después.
+     * Guarda los datos de un flyer de forma temporal para flujo CON pago.
+     * Pre-genera un eventId estable y precalcula el priceCents.
      */
     fun savePendingFlyer(
         title: String,
@@ -123,6 +199,10 @@ class CreateFlyerViewModel @Inject constructor(
         adOption: AdOption,
         highlightedText: String
     ) {
+        val preEventId = _draftId.value ?: UUID.randomUUID().toString()
+        _draftId.value = preEventId
+        val priceInCents = getPriceInCents(adOption)
+
         val pendingData = PendingFlyerData(
             title = title,
             description = description,
@@ -132,19 +212,33 @@ class CreateFlyerViewModel @Inject constructor(
             locationLabel = locationLabel,
             createdBy = createdBy,
             adOption = adOption,
-            highlightedText = highlightedText
+            highlightedText = highlightedText,
+            eventId = preEventId,
+            priceCents = priceInCents
         )
-        // Guarda los datos del flyer en el repositorio compartido
         sharedFlyerPaymentRepository.setPendingFlyer(pendingData)
-        Log.d("CreateFlyerViewModel", "Flyer pendiente guardado en el repositorio.")
+
+        // Asegura que el draft tenga los últimos valores visibles en tiempo real
+        updateDraft(
+            mapOf(
+                "title" to title,
+                "description" to description,
+                "bgColor" to bgColor,
+                "fontName" to fontName,
+                "city" to locationLabel,
+                "adOption" to adOption.name,
+                "highlightedText" to highlightedText,
+                "eventId" to preEventId,
+                "priceCents" to priceInCents,
+                "ownerId" to createdBy
+            )
+        )
+        Log.d("CreateFlyerViewModel", "Flyer pendiente guardado. eventId=$preEventId, priceCents=$priceInCents")
     }
 
     /**
-     * Función que finaliza el proceso de creación del flyer después de un pago exitoso.
-     * Esta función podría ser llamada desde el StripePaymentViewModel o desde la Activity/Screen
-     * después de recibir la confirmación de pago.
-     *
-     * @param onSuccess Callback para cuando el flyer ha sido guardado exitosamente.
+     * Finaliza el proceso de creación del flyer después de un pago exitoso.
+     * Reutiliza el mismo eventId/draftId para coherencia con Stripe.
      */
     fun finalizeFlyerAfterPayment(onSuccess: () -> Unit) {
         viewModelScope.launch {
@@ -153,8 +247,9 @@ class CreateFlyerViewModel @Inject constructor(
             try {
                 val pendingData = sharedFlyerPaymentRepository.pendingFlyerData.value
                 if (pendingData != null) {
-                    val id = UUID.randomUUID().toString() // Podrías almacenar el ID también en PendingFlyerData si lo generas antes
+                    val id = _draftId.value ?: pendingData.eventId ?: UUID.randomUUID().toString()
                     val location = currentLocation.value ?: GeoPoint(0.0, 0.0)
+                    val priceInCents = pendingData.priceCents ?: getPriceInCents(pendingData.adOption)
 
                     var imageUrl = ""
                     pendingData.imageUri?.let { uri ->
@@ -174,11 +269,17 @@ class CreateFlyerViewModel @Inject constructor(
                         bgColor = pendingData.bgColor,
                         fontName = pendingData.fontName,
                         adOption = pendingData.adOption.name,
-                        highlightedText = pendingData.highlightedText
+                        highlightedText = pendingData.highlightedText,
+                        eventId = id,
+                        priceCents = priceInCents,
+                        ownerId = pendingData.createdBy,
+                        dateMillis = System.currentTimeMillis(),
+                        city = pendingData.locationLabel
                     )
 
                     firestore.collection("flyers").document(id).set(flyer).await()
-                    sharedFlyerPaymentRepository.clearPendingFlyer() // Limpia el estado del repositorio
+                    sharedFlyerPaymentRepository.clearPendingFlyer()
+                    _draftId.value = null
                     onSuccess()
                 } else {
                     _errorMessage.value = "No hay datos de flyer pendientes para finalizar."
@@ -190,4 +291,8 @@ class CreateFlyerViewModel @Inject constructor(
             }
         }
     }
+
+    /** Útil para Stripe: devuelve el eventId actual (preferimos draftId si existe). */
+    fun currentEventId(): String? =
+        _draftId.value ?: sharedFlyerPaymentRepository.pendingFlyerData.value?.eventId
 }

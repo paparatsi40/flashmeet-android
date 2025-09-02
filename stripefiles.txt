@@ -1,0 +1,380 @@
+// app/src/main/java/com/carlitoswy/flashmeet/data/model/PaymentIntentResponse.kt
+package com.carlitoswy.flashmeet.data.model
+
+data class PaymentIntentResponse(val clientSecret: String)
+
+stripepaymentmanager:
+package com.carlitoswy.flashmeet.payments
+
+import android.content.Context
+import android.util.Log
+import androidx.activity.ComponentActivity
+import com.google.firebase.functions.FirebaseFunctions
+import com.google.firebase.functions.HttpsCallableResult
+import com.stripe.android.PaymentConfiguration
+import com.stripe.android.paymentsheet.PaymentSheet
+import com.stripe.android.paymentsheet.PaymentSheetResult
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
+import java.util.UUID
+
+object StripePaymentManager {
+
+    private const val TAG = "StripePaymentManager"
+
+    // Opcional: si usas Functions en una región específica:
+    private val functions by lazy {
+        // FirebaseFunctions.getInstance("us-central1")
+        FirebaseFunctions.getInstance()
+    }
+
+    /**
+     * Inicializa Stripe. Idealmente pasa la publishableKey desde backend/RemoteConfig.
+     * Nunca la hardcodees en release.
+     */
+    fun init(context: Context, publishableKey: String) {
+        PaymentConfiguration.init(context, publishableKey)
+        Log.d(TAG, "Stripe init OK")
+    }
+
+    // =========================================
+    // PaymentSheet (recomendado)
+    // =========================================
+
+    /**
+     * Presenta PaymentSheet inmediatamente (one-shot).
+     * Si quieres reutilizar, crea una instancia a nivel de Activity/VM.
+     */
+    fun presentPaymentSheet(
+        activity: ComponentActivity,
+        clientSecret: String,
+        configuration: PaymentSheet.Configuration,
+        onResult: (PaymentSheetResult) -> Unit
+    ) {
+        // Crea PaymentSheet con callback; presenta con el clientSecret
+        val sheet = PaymentSheet(activity) { result -> onResult(result) }
+        sheet.presentWithPaymentIntent(clientSecret, configuration)
+    }
+
+    /**
+     * Crea un PaymentIntent en el backend.
+     * Incluye metadata e idempotencyKey para reintentos seguros.
+     */
+    suspend fun createPaymentIntent(
+        amountCents: Long,
+        currency: String,
+        purpose: String,                 // e.g. "PROMOTION" | "BANNER"
+        metadata: Map<String, String> = emptyMap(),
+        functionName: String = "createPaymentIntent" // usa "payments-createPaymentIntent" si migras
+    ): CreatePIResponse = withContext(Dispatchers.IO) {
+        require(amountCents > 0) { "amountCents must be > 0" }
+
+        val payload = hashMapOf(
+            "amount" to amountCents,              // smallest unit
+            "currency" to currency.lowercase(),
+            "purpose" to purpose,
+            "metadata" to (metadata + mapOf("idempotencyKey" to UUID.randomUUID().toString()))
+        )
+
+        runCatching {
+            val res: HttpsCallableResult = functions
+                .getHttpsCallable(functionName)
+                .call(payload)
+                .await()
+
+            val map = res.data as Map<*, *>
+            val clientSecret = map["clientSecret"] as? String
+                ?: error("Missing clientSecret")
+            val paymentId = map["paymentId"] as? String
+                ?: (map["id"] as? String ?: "")
+
+            CreatePIResponse.Success(paymentId, clientSecret)
+        }.getOrElse { e ->
+            Log.e(TAG, "Error createPaymentIntent: ${e.message}", e)
+            CreatePIResponse.Error(e)
+        }
+    }
+
+    // =========================================
+    // Fallback: Confirmación manual (no recomendado para nuevos flujos)
+    // =========================================
+
+    /**
+     * Si decides mantener confirmación manual con tarjeta de prueba.
+     * OJO: en prod usa PaymentSheet/PaymentLauncher.
+     */
+    suspend fun confirmManualCardPayment(
+        activity: ComponentActivity,
+        clientSecret: String,
+        params: com.stripe.android.model.PaymentMethodCreateParams
+    ): ManualConfirmResult = withContext(Dispatchers.Main) {
+        try {
+            val stripe = com.stripe.android.Stripe(
+                activity,
+                PaymentConfiguration.getInstance(activity).publishableKey
+            )
+
+            val confirmParams = com.stripe.android.model.ConfirmPaymentIntentParams
+                .createWithPaymentMethodCreateParams(
+                    paymentMethodCreateParams = params,
+                    clientSecret = clientSecret
+                )
+
+            // Esto inicia un flujo que puede requerir 3DS y enviará resultado a onActivityResult (SDK maneja internamente).
+            // Necesitas observar el resultado (PaymentAuth UI). Con PaymentSheet no hace falta este manejo.
+            stripe.confirmPayment(activity, confirmParams)
+            ManualConfirmResult.Launched // El resultado final lo recibirá el SDK en la Activity.
+        } catch (e: Exception) {
+            Log.e(TAG, "Manual confirm error: ${e.message}", e)
+            ManualConfirmResult.Error(e)
+        }
+    }
+
+    /** Útil para pruebas locales sin tocar Stripe */
+    suspend fun simulateTestPayment(clientSecret: String): Boolean = withContext(Dispatchers.IO) {
+        Log.d(TAG, "Simulando pago con clientSecret: $clientSecret")
+        true
+    }
+}
+
+/** Respuesta tipada para la creación del PaymentIntent */
+sealed interface CreatePIResponse {
+    data class Success(val paymentId: String, val clientSecret: String) : CreatePIResponse
+    data class Error(val error: Throwable) : CreatePIResponse
+}
+
+/** Resultado del flujo manual */
+sealed interface ManualConfirmResult {
+    data object Launched : ManualConfirmResult
+    data class Error(val error: Throwable) : ManualConfirmResult
+}
+; paymentApi: package com.carlitoswy.flashmeet.data.remote.payments
+
+import retrofit2.http.Body
+import retrofit2.http.POST
+
+data class StripePaymentRequest(
+    val amount: Long,
+    val currency: String = "usd",
+    val purpose: String? = null,                 // "PROMOTION" | "BANNER" (opcional)
+    val metadata: Map<String, String>? = null    // e.g., eventId, userId
+)
+
+data class StripePaymentResponse(
+    val clientSecret: String,
+    val paymentId: String? = null                // si tu backend lo devuelve
+)
+
+interface PaymentApi {
+    @POST("/create-payment-intent")
+    suspend fun createPaymentIntent(@Body req: StripePaymentRequest): StripePaymentResponse
+}
+; stripepaymentscreen: package com.carlitoswy.flashmeet.presentation.payment
+
+// REMOVED: androidx.lifecycle.viewmodel.compose.viewModel // Ya no se usa si todo es hiltViewModel
+// REMOVED: import com.stripe.android.paymentsheet.PaymentSheet // No se necesita importar directamente si usas rememberPaymentSheet
+import androidx.activity.ComponentActivity
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
+import com.carlitoswy.flashmeet.presentation.flyer.CreateFlyerViewModel
+import com.carlitoswy.flashmeet.ui.navigation.Routes
+import com.stripe.android.PaymentConfiguration
+import com.stripe.android.paymentsheet.PaymentSheetResult
+import com.stripe.android.paymentsheet.rememberPaymentSheet
+
+@Composable
+fun StripePaymentScreen(
+    navController: NavHostController,
+    // MODIFIED: Usar hiltViewModel() para CreateFlyerViewModel también
+    createFlyerViewModel: CreateFlyerViewModel = hiltViewModel(),
+    stripeViewModel: StripePaymentViewModel = hiltViewModel()
+) {
+    val context = LocalContext.current
+    // Es buena práctica asegurarse de que el contexto es una ComponentActivity
+    val activity = context as? ComponentActivity
+        ?: error("StripePaymentScreen debe estar en Activity que herede de ComponentActivity")
+
+    // Initialize Stripe SDK with the publishable key
+    LaunchedEffect(Unit) {
+        PaymentConfiguration.init(context, stripeViewModel.publishableKey)
+        stripeViewModel.fetchPaymentIntent()
+    }
+
+    val clientSecret by stripeViewModel.clientSecret.collectAsState()
+    val statusText by stripeViewModel.statusText.collectAsState()
+    val isLoading by stripeViewModel.isLoading.collectAsState()
+
+    // MODIFIED: Usar rememberPaymentSheet para obtener el PaymentSheetLauncher
+    val paymentSheetLauncher = rememberPaymentSheet(
+        paymentResultCallback = { result ->
+            when (result) {
+                is PaymentSheetResult.Completed -> {
+                    stripeViewModel.setStatus("✅ Pago exitoso")
+                    // MODIFIED: Llamar a la función correcta en CreateFlyerViewModel
+                    // que ahora se encargará de guardar el flyer en Firestore/Storage
+                    createFlyerViewModel.finalizeFlyerAfterPayment {
+                        // Después de que el flyer se haya finalizado correctamente,
+                        // podemos navegar a una pantalla de éxito o regresar.
+                        // Ejemplo: Navegar a la pantalla principal (HOME)
+                        // popUpTo te ayuda a limpiar el stack de navegación si lo necesitas.
+                        navController.navigate(Routes.HOME) {
+                            popUpTo(Routes.HOME) { inclusive = true } // Limpia el stack hasta HOME
+                        }
+                    }
+                }
+                is PaymentSheetResult.Canceled ->
+                    stripeViewModel.setStatus("⚠️ Pago cancelado")
+                is PaymentSheetResult.Failed ->
+                    // El error contiene detalles sobre por qué falló el pago.
+                    stripeViewModel.setStatus("❌ Error: ${result.error.localizedMessage}")
+            }
+        }
+    )
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Button(
+            onClick = {
+                clientSecret?.let { secret ->
+                    // Usar el launcher obtenido de rememberPaymentSheet para presentar la hoja de pago
+                    paymentSheetLauncher.presentWithPaymentIntent(
+                        paymentIntentClientSecret = secret,
+                        configuration = com.stripe.android.paymentsheet.PaymentSheet.Configuration(
+                            merchantDisplayName = "FlashMeet Inc."
+                            // Puedes añadir más configuraciones aquí, como la recolección de detalles
+                            // del cliente, dirección de facturación, etc.
+                        )
+                    )
+                }
+            },
+            // El botón estará habilitado solo si tenemos el clientSecret, no estamos cargando
+            // y la actividad es válida.
+            enabled = clientSecret != null && !isLoading && activity != null
+        ) {
+            Text("Pagar ahora")
+        }
+
+        if (isLoading) CircularProgressIndicator()
+        if (statusText.isNotEmpty()) Text(statusText)
+    }
+}
+stripepaymentviewmodel: package com.carlitoswy.flashmeet.presentation.payment
+
+// ¡IMPORTANTE! Asegúrate de que esta importación sea correcta.
+// Esta importación asume que tu archivo PaymentIntentResponse.kt
+// se encuentra en la ruta:
+// app/src/main/java/com/carlitoswy/flashmeet/data/model/PaymentIntentResponse.kt
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.carlitoswy.flashmeet.data.model.PaymentIntentResponse
+import com.carlitoswy.flashmeet.data.repository.SharedFlyerPaymentRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class StripePaymentViewModel @Inject constructor(
+    private val sharedFlyerPaymentRepository: SharedFlyerPaymentRepository
+) : ViewModel() {
+
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> = _isLoading
+
+    private val _statusText = MutableStateFlow("")
+    val statusText: StateFlow<String> = _statusText
+
+    val publishableKey: String = "pk_test_51KgF4kIHad7GoCUdlt2ifslj3nKHu4ad79MwhvKpQBVJrG8qRKE7z1fCfcYOdJPLpm8AT3fNelJkwWiL48STKu030006fulz3O"
+
+    val clientSecret: StateFlow<String?> = sharedFlyerPaymentRepository.clientSecret
+
+    init {
+        // No necesitas código aquí a menos que quieras cargar el PaymentIntent
+        // inmediatamente al crear el ViewModel, lo cual ya haces en fetchPaymentIntent().
+    }
+
+    fun fetchPaymentIntent() {
+        viewModelScope.launch {
+            _isLoading.value = true
+            _statusText.value = "Fetching payment intent..."
+            try {
+                val pendingFlyer = sharedFlyerPaymentRepository.pendingFlyerData.value
+                if (pendingFlyer != null) {
+                    // Aquí es donde harías la llamada real a tu backend.
+                    // Voy a simular la respuesta del backend como si viniera
+                    // de un servicio Retrofit o similar.
+                    // Las líneas de error 32, 33, 35 probablemente están dentro de este bloque.
+
+                    // SIMULACIÓN DE LLAMADA A BACKEND:
+                    // En un proyecto real, tendrías un servicio (ej. Retrofit) inyectado aquí
+                    // y llamarías a un método para obtener el clientSecret de tu servidor.
+                    // Por ejemplo: val response = myBackendService.createPaymentIntent(pendingFlyer)
+                    // Y luego procesarías la respuesta:
+                    // val paymentIntentResponse = response.body()
+
+                    // Para que compile, y asumiendo que tu backend te devuelve un PaymentIntentResponse
+                    // con un clientSecret:
+                    val mockBackendResponse = PaymentIntentResponse(
+                        clientSecret = "pi_YOUR_ACTUAL_CLIENT_SECRET_FROM_BACKEND_LIVE_OR_TEST" // Reemplaza con uno real
+                    )
+
+                    // Linea 32 (aprox.) - val fetchedResponse = ...
+                    // Linea 33 (aprox.) - val paymentIntentResponse = fetchedResponse.body() o directamente mockBackendResponse
+                    val fetchedSecret = mockBackendResponse.clientSecret // Linea 35 (aprox.)
+
+                    if (fetchedSecret != null) {
+                        sharedFlyerPaymentRepository.updateClientSecret(fetchedSecret)
+                        _statusText.value = "Payment intent fetched!"
+                    } else {
+                        _statusText.value = "Error: Client secret not found in response."
+                    }
+                } else {
+                    _statusText.value = "No pending flyer data found."
+                }
+                _isLoading.value = false
+            } catch (e: Exception) {
+                _statusText.value = "Error fetching payment intent: ${e.localizedMessage}"
+                _isLoading.value = false
+            }
+        }
+    }
+
+    fun setStatus(message: String) {
+        _statusText.value = message
+    }
+
+    // Esta función probablemente la uses para limpiar el estado del flyer una vez pagado
+    // o para disparar la finalización en el CreateFlyerViewModel.
+    fun finalizeFlyerPaymentSuccess(onSuccess: () -> Unit) {
+        viewModelScope.launch {
+            // Aquí puedes añadir cualquier lógica de tu StripePaymentViewModel
+            // para después de un pago exitoso (ej. notificar a tu backend).
+            // Luego, limpia el estado pendiente del flyer si ya se ha procesado.
+            sharedFlyerPaymentRepository.clearPendingFlyer()
+            onSuccess() // Este callback lo usará la UI para navegar o mostrar un mensaje
+        }
+    }
+}

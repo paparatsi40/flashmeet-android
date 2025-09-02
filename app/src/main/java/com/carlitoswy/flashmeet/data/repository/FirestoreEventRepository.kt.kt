@@ -1,14 +1,16 @@
 package com.carlitoswy.flashmeet.data.repository
 
+import android.net.Uri
 import com.carlitoswy.flashmeet.domain.model.Event
 import com.carlitoswy.flashmeet.domain.repository.EventRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.tasks.await // ¡Asegúrate de tener esta importación para .await()!
+import kotlinx.coroutines.tasks.await
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -38,14 +40,22 @@ class FirestoreEventRepository @Inject constructor(
                     close(error)
                     return@addSnapshotListener
                 }
-                val list = snap?.documents
-                    ?.mapNotNull { it.toObject(Event::class.java) }
-                    ?: emptyList()
+
+                val list = snap?.documents?.mapNotNull { doc ->
+                    try {
+                        doc.toObject(Event::class.java)
+                    } catch (e: Exception) {
+                        println("⚠️ Error deserializing event: ${e.message}")
+                        null
+                    }
+                } ?: emptyList()
+
                 trySend(list)
             }
 
         awaitClose { listener.remove() }
     }
+
 
     override fun getNearbyEvents(latitude: Double, longitude: Double): Flow<List<Event>> = callbackFlow {
         val query = eventsCollection
@@ -59,12 +69,22 @@ class FirestoreEventRepository @Inject constructor(
                 close(error)
                 return@addSnapshotListener
             }
-            val events = snapshot?.toObjects(Event::class.java).orEmpty()
+
+            val events = snapshot?.documents?.mapNotNull { doc ->
+                try {
+                    doc.toObject(Event::class.java)
+                } catch (e: Exception) {
+                    println("⚠️ Error deserializing nearby event: ${e.message}")
+                    null
+                }
+            }.orEmpty()
+
             trySend(events)
         }
 
         awaitClose { listener.remove() }
     }
+
 
     override suspend fun createEvent(event: Event) {
         eventsCollection.document(event.id).set(event).await()
@@ -116,41 +136,67 @@ class FirestoreEventRepository @Inject constructor(
                         .whereGreaterThanOrEqualTo("timestamp", startOfDayMillis)
                         .whereLessThan("timestamp", endOfDayMillis)
                 } catch (e: ParseException) {
-                    println("FlashMeet: Error parsing date in FirebaseEventRepository: $date. Error: ${e.message}")
+                    println("FlashMeet: Error parsing date: $date. ${e.message}")
                 }
             }
 
             val snapshot = query.get().await()
-            snapshot.documents.mapNotNull { document ->
-                document.toObject(Event::class.java)
+            snapshot.documents.mapNotNull { doc ->
+                try {
+                    doc.toObject(Event::class.java)
+                } catch (e: Exception) {
+                    println("⚠️ Error deserializing searched event: ${e.message}")
+                    null
+                }
             }
+
         } catch (e: Exception) {
-            println("FlashMeet: Error searching events in FirebaseEventRepository: ${e.message}")
+            println("FlashMeet: Error searching events: ${e.message}")
             emptyList()
         }
     }
 
-    // ¡¡AÑADIDAS LAS IMPLEMENTACIONES FALTANTES!!
     override suspend fun getEventById(eventId: String): Event? {
         return try {
-            eventsCollection.document(eventId) // Usa eventsCollection
-                .get()
-                .await()
-                .toObject(Event::class.java)
+            val snap = eventsCollection.document(eventId).get().await()
+            try {
+                snap.toObject(Event::class.java)
+            } catch (e: Exception) {
+                println("⚠️ Error deserializing event by ID: ${e.message}")
+                null
+            }
+
         } catch (e: Exception) {
-            println("FlashMeet: Error al obtener el evento con ID $eventId: ${e.message}")
+            println("FlashMeet: Error getting event by ID $eventId: ${e.message}")
             null
         }
     }
 
     override suspend fun updateEvent(event: Event) {
         try {
-            eventsCollection.document(event.id) // Usa eventsCollection
-                .set(event) // `set` para sobrescribir o `update` para campos específicos
-                .await()
+            eventsCollection.document(event.id).set(event).await()
         } catch (e: Exception) {
-            println("FlashMeet: Error al actualizar el evento con ID ${event.id}: ${e.message}")
+            println("FlashMeet: Error updating event ${event.id}: ${e.message}")
             throw e
+        }
+    }
+
+    override suspend fun uploadEventImage(imageUri: Uri, eventId: String): String? {
+        return try {
+            val storageRef = FirebaseStorage.getInstance()
+                .reference
+                .child("event_images/$eventId.jpg")
+
+            val uploadTask = storageRef.putFile(imageUri).await()
+            if (uploadTask.task.isSuccessful) {
+                storageRef.downloadUrl.await().toString()
+            } else {
+                println("FlashMeet: Error uploading image: ${uploadTask.task.exception?.message}")
+                null
+            }
+        } catch (e: Exception) {
+            println("FlashMeet: Exception in uploadEventImage: ${e.message}")
+            null
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.carlitoswy.flashmeet.data.repository
 
+import android.net.Uri
 import android.util.Log
 import com.carlitoswy.flashmeet.domain.model.Event
 import com.carlitoswy.flashmeet.domain.repository.EventRepository
@@ -7,6 +8,7 @@ import com.carlitoswy.flashmeet.utils.await
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -19,7 +21,8 @@ import javax.inject.Singleton
 
 @Singleton
 class EventRepositoryImpl @Inject constructor(
-    private val firestore: FirebaseFirestore
+    private val firestore: FirebaseFirestore,
+    private val storage: FirebaseStorage // Inyección de FirebaseStorage, ¡bien!
 ) : EventRepository {
 
     private val TAG = "EventRepo"
@@ -146,6 +149,20 @@ class EventRepositoryImpl @Inject constructor(
         } catch (e: Exception) {
             Log.e(TAG, "Error actualizando evento ${event.id}: ${e.message}")
             throw e
+        }
+    }
+
+    // ✨ ¡AÑADE ESTA FUNCIÓN PARA IMPLEMENTAR EL MIEMBRO ABSTRACTO!
+    override suspend fun uploadEventImage(imageUri: Uri, eventId: String): String? {
+        return try {
+            val ref = storage.getReference("event_images/$eventId.jpg")
+            ref.putFile(imageUri).await() // Sube el archivo
+            val downloadUrl = ref.downloadUrl.await().toString() // Obtiene la URL de descarga
+            Log.d(TAG, "Imagen de evento $eventId subida: $downloadUrl")
+            downloadUrl
+        } catch (e: Exception) {
+            Log.e(TAG, "Error subiendo imagen de evento $eventId: ${e.message}", e)
+            null
         }
     }
 }

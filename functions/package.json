@@ -1,5 +1,15 @@
 {
+  "name": "flashmeet-functions",
+  "description": "Funciones de Firebase para pagos Stripe",
+  "engines": {
+    "node": "20"
+  },
+  "main": "index.js",
   "dependencies": {
+    "dotenv": "^17.2.1",
+    "firebase-admin": "^11.0.0",
+    "firebase-functions": "^6.4.0",
     "stripe": "^18.4.0"
-  }
+  },
+  "private": true
 }

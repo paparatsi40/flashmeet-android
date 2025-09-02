@@ -6,6 +6,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
@@ -58,77 +62,36 @@
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.FlashMeet">
+            android:theme="@style/Theme.FlashMeet"
+            android:launchMode="singleTop">
 
-            <!-- Deep Link Universal (https) existente -->
+            <!-- 🚀 App Links (HTTPS) — PRODUCCIÓN + (opcional) STAGING -->
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https" />
-                <data android:host="flashmeet.app" />
-                <data android:pathPrefix="/event" />
-                <!-- opcional: ruta corta /e/ -->
-                <data android:scheme="https" />
-                <data android:host="flashmeet.app" />
-                <data android:pathPrefix="/e" />
-                <!-- opcional: con www -->
-                <data android:scheme="https" />
-                <data android:host="www.flashmeet.app" />
-                <data android:pathPrefix="/event" />
-                <data android:scheme="https" />
-                <data android:host="www.flashmeet.app" />
-                <data android:pathPrefix="/e" />
+
+                <!-- PRODUCCIÓN: 123myway.com -->
+                <data android:scheme="https" android:host="123myway.com"        android:pathPrefix="/event" />
+                <data android:scheme="https" android:host="123myway.com"        android:pathPrefix="/e" />
+                <data android:scheme="https" android:host="www.123myway.com"    android:pathPrefix="/event" />
+                <data android:scheme="https" android:host="www.123myway.com"    android:pathPrefix="/e" />
             </intent-filter>
 
-            <!-- 🔥 Esquema personalizado (funciona sin assetlinks.json) -->
+
+            <!-- 🔥 Fallback: esquema personalizado (funciona sin assetlinks.json) -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!-- Abre flashmeet://event/<id> -->
-                <data android:scheme="flashmeet" android:host="event" />
+                <data android:scheme="flashmeet" android:host="event" android:pathPrefix="/" />
             </intent-filter>
 
-
-            <!-- Launcher -->
+            <!-- 🚀 Launcher -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-            <!-- App Links (web) -->
-            <!-- Principal: https://flashmeet.app/e/{eventId} -->
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data
-                    android:scheme="https"
-                    android:host="flashmeet.app"
-                    android:pathPrefix="/e" />
-            </intent-filter>
-
-            <!-- Compatibilidad: https://flashmeet.app/event/{eventId} -->
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data
-                    android:scheme="https"
-                    android:host="flashmeet.app"
-                    android:pathPrefix="/event" />
-            </intent-filter>
-
-            <!-- Custom scheme: flashmeet://event/{eventId} -->
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data
-                    android:scheme="flashmeet"
-                    android:host="event"
-                    android:pathPrefix="/" />
             </intent-filter>
         </activity>
 

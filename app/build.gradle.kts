@@ -13,20 +13,23 @@ android {
     namespace = "com.carlitoswy.flashmeet"
     compileSdk = 35
 
-    buildFeatures {
-        compose = true
-        buildConfig = true   // 👈 HABILITA BuildConfig
+    signingConfigs {
+        create("release") {
+            storeFile = file("../keystore/flashmeet-upload-key.jks") // Ruta al .jks
+            storePassword = project.findProperty("KEYSTORE_PASSWORD") as String
+            keyAlias = "flashmeetkey"
+            keyPassword = project.findProperty("KEY_PASSWORD") as String
+        }
     }
 
     defaultConfig {
         applicationId = "com.carlitoswy.flashmeet"
         minSdk = 26
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.0.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        // ✅ BuildConfig para DEBUG (fallbacks locales)
         buildConfigField(
             "String",
             "STRIPE_PUBLISHABLE_KEY",
@@ -40,13 +43,13 @@ android {
     }
 
     buildTypes {
-        release {
+        getByName("release") {
             isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            // ✅ En release, inyecta por CI (no hardcodees)
             buildConfigField(
                 "String",
                 "STRIPE_PUBLISHABLE_KEY",
@@ -58,9 +61,15 @@ android {
                 "\"${project.findProperty("PAYMENTS_BASE_URL_RELEASE") ?: ""}\""
             )
         }
-        debug {
-            // Si quieres sobreescribir defaultConfig en debug, hazlo aquí.
+
+        getByName("debug") {
+            // configs debug si hace falta
         }
+    }
+
+    buildFeatures {
+        compose = true
+        buildConfig = true
     }
 
     compileOptions {
@@ -68,9 +77,9 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    kotlinOptions { jvmTarget = "11" }
-
-    buildFeatures { compose = true }
+    kotlinOptions {
+        jvmTarget = "11"
+    }
 
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
@@ -82,6 +91,7 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
+    implementation ("androidx.appcompat:appcompat:1.7.1")
 
     // Compose
     implementation(platform(libs.androidx.compose.bom))
@@ -112,6 +122,8 @@ dependencies {
     implementation(libs.firebase.storage)
     implementation(libs.firebase.auth)
     implementation("com.google.firebase:firebase-messaging")
+    implementation (libs.firebase.firestore.ktx)
+
 
     // CameraX
     implementation(libs.androidx.camera.core)

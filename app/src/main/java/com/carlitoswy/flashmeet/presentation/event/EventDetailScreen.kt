@@ -1,36 +1,17 @@
 package com.carlitoswy.flashmeet.presentation.event
 
+import com.carlitoswy.flashmeet.presentation.event.EventDetailViewModel
 import android.annotation.SuppressLint
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
+import android.net.Uri
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.MyLocation
-import androidx.compose.material.icons.filled.Share
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -40,14 +21,16 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
+import com.carlitoswy.flashmeet.core.deeplink.DeeplinkBuilder
 import com.carlitoswy.flashmeet.domain.model.Event
 import com.carlitoswy.flashmeet.domain.model.color
 import com.carlitoswy.flashmeet.domain.model.icon
 import com.carlitoswy.flashmeet.domain.model.toCategoryEnum
+import com.carlitoswy.flashmeet.presentation.components.FlyerPreview
 import com.carlitoswy.flashmeet.ui.navigation.Routes
 import com.carlitoswy.flashmeet.utils.dateFormatted
 import com.carlitoswy.flashmeet.utils.navigateWithGoogleMaps
-import com.carlitoswy.flashmeet.utils.shareEvent
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -55,28 +38,63 @@ import com.carlitoswy.flashmeet.utils.shareEvent
 fun EventDetailScreen(
     navController: NavController,
     eventId: String,
-    viewModel: EventDetailViewModel = hiltViewModel() // <-- Cambiado a EventDetailViewModel
+    viewModel: EventDetailViewModel = hiltViewModel()
 ) {
-    val uiState by viewModel.uiState.collectAsState() // <-- Recoge el uiState unificado
+    val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
+    val snackbarHost = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
 
-    LaunchedEffect(eventId) { viewModel.loadEventById(eventId) } // <-- Llama a loadEventById
+    LaunchedEffect(eventId) { viewModel.loadEventById(eventId) }
 
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text("Detalle del Evento") },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(Icons.Default.ArrowBack, contentDescription = "Volver")
+                    }
+                },
                 actions = {
-                    // Asegúrate de que event no sea null antes de compartir
-                    IconButton(onClick = { uiState.event?.let { shareEvent(context, it) } }) {
-                        Icon(Icons.Default.Share, contentDescription = "Compartir")
+                    uiState.event?.let { e ->
+                        IconButton(
+                            onClick = {
+                                DeeplinkBuilder.shareEvent(
+                                    context = context,
+                                    id = e.id,
+                                    host = DeeplinkBuilder.PROD_HOST,
+                                    shortPath = true,
+                                    lat = e.latitude,
+                                    lon = e.longitude
+                                )
+                            }
+                        ) { Icon(Icons.Default.Share, contentDescription = "Compartir") }
+
+                        IconButton(
+                            onClick = {
+                                val url = DeeplinkBuilder.eventHttps(
+                                    id = e.id,
+                                    host = DeeplinkBuilder.PROD_HOST,
+                                    shortPath = true,
+                                    lat = e.latitude,
+                                    lon = e.longitude
+                                )
+                                copyToClipboard(context, "FlashMeet", url)
+                                scope.launch { snackbarHost.showSnackbar("Link copiado") }
+                            }
+                        ) { Icon(Icons.Default.ContentCopy, contentDescription = "Copiar link") }
                     }
                 }
             )
-        }
-    ) { paddingValues -> // Usamos paddingValues para el content
-        // Usamos Box con Modifier.padding(paddingValues) para aplicar el padding del Scaffold
-        Box(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
+        },
+        snackbarHost = { SnackbarHost(hostState = snackbarHost) }
+    ) { paddingValues ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+        ) {
             when {
                 uiState.isLoading -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     CircularProgressIndicator()
@@ -84,54 +102,89 @@ fun EventDetailScreen(
                 uiState.errorMessage != null -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     Text("Error: ${uiState.errorMessage}")
                 }
-                uiState.event != null -> EventDetailContent(uiState.event!!, navController, context)
+                uiState.event != null -> EventDetailContent(
+                    event = uiState.event!!,
+                    navController = navController,
+                    context = context,
+                    onCopy = {
+                        val url = DeeplinkBuilder.eventHttps(
+                            id = uiState.event!!.id,
+                            host = DeeplinkBuilder.PROD_HOST,
+                            shortPath = true,
+                            lat = uiState.event!!.latitude,
+                            lon = uiState.event!!.longitude
+                        )
+                        copyToClipboard(context, "FlashMeet", url)
+                        scope.launch { snackbarHost.showSnackbar("Link copiado") }
+                    },
+                    onShare = {
+                        DeeplinkBuilder.shareEvent(
+                            context = context,
+                            id = uiState.event!!.id,
+                            host = DeeplinkBuilder.PROD_HOST,
+                            shortPath = true,
+                            lat = uiState.event!!.latitude,
+                            lon = uiState.event!!.longitude
+                        )
+                    }
+                )
             }
         }
     }
 }
 
 @Composable
-private fun EventDetailContent(event: Event, navController: NavController, context: Context) {
+private fun EventDetailContent(
+    event: Event,
+    navController: NavController,
+    context: Context,
+    onCopy: () -> Unit,
+    onShare: () -> Unit
+) {
     val categoryEnum = event.toCategoryEnum()
+    val hasCustomFlyer = event.flyerTextColor != null || event.flyerBackgroundColor != null || event.flyerFontFamily != null
 
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
-
-        // 🖼 Imagen si existe
-        event.imageUrl?.let {
-            Image(
-                painter = rememberAsyncImagePainter(it),
-                contentDescription = event.title,
-                modifier = Modifier.fillMaxWidth().height(200.dp),
-                contentScale = ContentScale.Crop
+        if (hasCustomFlyer) {
+            FlyerPreview(
+                title = event.title,
+                description = event.description,
+                imageUri = event.imageUrl?.let { Uri.parse(it) },
+                textColor = (event.flyerTextColor ?: "#FFFFFF").toColor(),
+                backgroundColor = (event.flyerBackgroundColor ?: "#000000").toColor(),
+                fontFamily = event.flyerFontFamily ?: "SansSerif",
+                modifier = Modifier.fillMaxWidth().padding(bottom = 12.dp)
             )
+        } else {
+            event.imageUrl?.let {
+                Image(
+                    painter = rememberAsyncImagePainter(it),
+                    contentDescription = event.title,
+                    modifier = Modifier.fillMaxWidth().height(200.dp),
+                    contentScale = ContentScale.Crop
+                )
+            }
         }
 
         Spacer(Modifier.height(12.dp))
+        Text(text = event.title, style = MaterialTheme.typography.headlineSmall)
 
-        // 🏷️ Título y categoría (ajustado para que el título del evento sea el principal)
-        Text(
-            text = event.title,
-            style = MaterialTheme.typography.headlineSmall
-        )
         Row(verticalAlignment = Alignment.CenterVertically) {
             categoryEnum?.let {
                 Icon(
                     imageVector = it.icon(),
-                    contentDescription = it.displayName(), // Usar displayName si está disponible
+                    contentDescription = it.displayName(),
                     tint = it.color(),
-                    modifier = Modifier.size(20.dp).padding(end = 4.dp) // Ajuste de tamaño
+                    modifier = Modifier.size(20.dp).padding(end = 4.dp)
                 )
             }
-            // Mueve la fecha formateada aquí para que esté junto a la categoría o debajo del título
             Text(
-                text = event.timestamp.dateFormatted(), // <-- ESTA LÍNEA AHORA ES CORRECTA
+                text = event.timestamp.dateFormatted(),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.primary
             )
         }
 
-
-        // 🌍 Ubicación
         if (event.city.isNotEmpty() || event.country.isNotEmpty()) {
             Text(
                 text = "${event.city}, ${event.country}".trim().trim(','),
@@ -141,7 +194,6 @@ private fun EventDetailContent(event: Event, navController: NavController, conte
             )
         }
 
-        // 📝 Descripción
         Text(
             text = event.description,
             style = MaterialTheme.typography.bodyLarge,
@@ -149,13 +201,16 @@ private fun EventDetailContent(event: Event, navController: NavController, conte
         )
 
         Spacer(Modifier.height(16.dp))
-
-        // 🔘 Acciones
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            OutlinedButton(onClick = { shareEvent(context, event) }) {
+            OutlinedButton(onClick = onShare) {
                 Icon(Icons.Default.Share, contentDescription = "Compartir")
                 Spacer(Modifier.width(6.dp))
                 Text("Compartir")
+            }
+            OutlinedButton(onClick = onCopy) {
+                Icon(Icons.Default.ContentCopy, contentDescription = "Copiar link")
+                Spacer(Modifier.width(6.dp))
+                Text("Copiar link")
             }
             OutlinedButton(onClick = { navigateWithGoogleMaps(context, event) }) {
                 Icon(Icons.Default.MyLocation, contentDescription = "Navegar")
@@ -170,3 +225,10 @@ private fun EventDetailContent(event: Event, navController: NavController, conte
         }
     }
 }
+
+private fun copyToClipboard(context: Context, label: String, text: String) {
+    val cm = context.getSystemService(ClipboardManager::class.java)
+    cm.setPrimaryClip(ClipData.newPlainText(label, text))
+}
+
+private fun String.toColor(): Color = Color(android.graphics.Color.parseColor(this))

@@ -80,6 +80,7 @@ firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "fir
 # Ya no necesitamos especificar el sufijo -ktx aquí, el BoM se encarga y el módulo principal incluye las extensiones KTX
 firebase-auth = { module = "com.google.firebase:firebase-auth" }
 firebase-firestore = { module = "com.google.firebase:firebase-firestore" }
+firebase-firestore-ktx = { module = "com.google.firebase:firebase-firestore-ktx" }
 firebase-storage = { module = "com.google.firebase:firebase-storage" }
 # Eliminamos las entradas duplicadas y con sufijo -ktx
 # google-firebase-firestore-ktx = { module = "com.google.firebase:firebase-firestore-ktx" }

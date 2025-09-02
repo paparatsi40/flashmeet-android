@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "flashmeet-72bbf"
-  }
+    "default": "flashmeet-72bbf",
+    "staging": "flashmeet-72bbf"
+  },
+  "targets": {},
+  "etags": {}
 }

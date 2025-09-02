@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.carlitoswy.flashmeet.domain.model.Flyer
 import com.carlitoswy.flashmeet.utils.await
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.GeoPoint // Necesitas importar GeoPoint
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -44,7 +45,10 @@ class FlyerEditorViewModel : ViewModel() {
                     createdBy = createdBy,
                     timestamp = System.currentTimeMillis(),
                     bgColor = bgColor.value,
-                    fontName = fontName.value
+                    fontName = fontName.value,
+                    location = GeoPoint(0.0, 0.0), // <-- ¡Añadido! Usando el valor por defecto
+                    adOption = "NONE",            // <-- ¡Añadido! Usando el valor por defecto
+                    highlightedText = ""          // <-- ¡Añadido! Usando el valor por defecto
                 )
 
                 firestore.collection("flyers").document(flyerId).set(flyer).await()

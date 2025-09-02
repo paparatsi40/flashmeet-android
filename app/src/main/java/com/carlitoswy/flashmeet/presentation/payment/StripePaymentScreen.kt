@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -47,6 +48,11 @@ fun StripePaymentScreen(
     val clientSecret by stripeViewModel.clientSecret.collectAsState()
     val statusText by stripeViewModel.statusText.collectAsState()
     val isLoading by stripeViewModel.isLoading.collectAsState()
+
+    // ⬇️ Derivar paymentId a partir del clientSecret (ej: "pi_xxx" en Stripe)
+    val paymentIdForBanner = remember(clientSecret) {
+        clientSecret?.substringBefore("_secret_")
+    }
 
     // MODIFIED: Usar rememberPaymentSheet para obtener el PaymentSheetLauncher
     val paymentSheetLauncher = rememberPaymentSheet(

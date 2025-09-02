@@ -6,21 +6,13 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import com.carlitoswy.flashmeet.datastore.OnboardingPrefs
 import com.carlitoswy.flashmeet.localization.LocalAppLanguage
@@ -105,10 +97,6 @@ class MainActivity : ComponentActivity() {
                         }
                     }
 
-                    // ✅ Botón Crashlytics
-                    Box(Modifier.fillMaxSize().padding(16.dp), contentAlignment = Alignment.BottomCenter) {
-                        Button(onClick = { throw RuntimeException("💥 Crash de prueba de FlashMeet!") }) { Text("Forzar Crash") }
-                    }
                 }
             }
         }
