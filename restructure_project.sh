@@ -1,80 +1,48 @@
 #!/bin/bash
 
-set -e
+echo "🚧 Reestructurando proyecto FlashMeet..."
 
-echo "📦 Reorganizando estructura del proyecto FlashMeet..."
+BASE="app/src/main/java/com/carlitoswy/flashmeet"
 
-# Crear módulos raíz
-mkdir -p core/ui core/utils data/local data/remote data/repository domain/model domain/usecase domain/repository feature/events feature/flyers feature/settings feature/map feature/auth
+# Capa data
+mkdir -p $BASE/data/repository
+mkdir -p $BASE/data/remote
+mkdir -p $BASE/data/local
+git mv $BASE/data/preferences $BASE/data/local/preferences
+git mv $BASE/data/repository/*.kt $BASE/data/repository/
 
-# Mover código existente a la nueva estructura
-mv app/src/main/java/com/carlitoswy/flashmeet/data/local/* data/local/ 2>/dev/null || true
-mv app/src/main/java/com/carlitoswy/flashmeet/data/remote/* data/remote/ 2>/dev/null || true
-mv app/src/main/java/com/carlitoswy/flashmeet/data/repository/* data/repository/ 2>/dev/null || true
+# Capa domain
+mkdir -p $BASE/domain/model
+mkdir -p $BASE/domain/usecase
+mkdir -p $BASE/domain/repository
+# Puedes mover modelos si aún no están en domain
+# git mv $BASE/data/model/*.kt $BASE/domain/model/
 
-mv app/src/main/java/com/carlitoswy/flashmeet/domain/model/* domain/model/ 2>/dev/null || true
-mv app/src/main/java/com/carlitoswy/flashmeet/domain/usecase/* domain/usecase/ 2>/dev/null || true
-mv app/src/main/java/com/carlitoswy/flashmeet/domain/repository/* domain/repository/ 2>/dev/null || true
+# Capa presentation
+mkdir -p $BASE/presentation/features
+mkdir -p $BASE/presentation/common/components
+mkdir -p $BASE/presentation/common/utils
+mkdir -p $BASE/presentation/navigation
 
-mv app/src/main/java/com/carlitoswy/flashmeet/utils/* core/utils/ 2>/dev/null || true
-mv app/src/main/java/com/carlitoswy/flashmeet/ui/components/* core/ui/ 2>/dev/null || true
-
-# Mover pantallas por feature
-mv app/src/main/java/com/carlitoswy/flashmeet/presentation/event/* feature/events/ 2>/dev/null || true
-mv app/src/main/java/com/carlitoswy/flashmeet/presentation/flyer/* feature/flyers/ 2>/dev/null || true
-mv app/src/main/java/com/carlitoswy/flashmeet/presentation/settings/* feature/settings/ 2>/dev/null || true
-mv app/src/main/java/com/carlitoswy/flashmeet/presentation/map/* feature/map/ 2>/dev/null || true
-mv app/src/main/java/com/carlitoswy/flashmeet/presentation/login/* feature/auth/ 2>/dev/null || true
-
-# Eliminar duplicados innecesarios
-rm -rf app/src/main/java/com/carlitoswy/flashmeet/MyEventsLegacyScreen.kt 2>/dev/null || true
-rm -rf app/src/main/java/com/carlitoswy/flashmeet/util 2>/dev/null || true
-
-echo "✅ Carpetas reorganizadas."
-
-# Crear archivos build.gradle.kts básicos
-for module in core/ui core/utils data/local data/remote data/repository domain feature/events feature/flyers feature/settings feature/map feature/auth; do
-  mkdir -p $module/src/main/kotlin
-  cat > $module/build.gradle.kts <<EOF
-plugins {
-    id("com.android.library")
-    kotlin("android")
-}
-
-android {
-    namespace = "com.flashmeet.${module//\//.}"
-    compileSdk = 34
-
-    defaultConfig {
-        minSdk = 24
-    }
-
-    buildFeatures {
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.0"
-    }
-}
-
-dependencies {
-    // Dependencias comunes o específicas del módulo
-}
-EOF
+# Mover pantallas a features
+for feature in event flyer payment search camera myevents home
+do
+  if [ -d "$BASE/presentation/$feature" ]; then
+    git mv "$BASE/presentation/$feature" "$BASE/presentation/features/$feature"
+  fi
 done
 
-# Crear settings.gradle.kts
-cat > settings.gradle.kts <<EOF
-rootProject.name = "FlashMeet"
+# Mover componentes comunes
+git mv $BASE/presentation/components $BASE/presentation/common/components
+git mv $BASE/utils $BASE/presentation/common/utils
+git mv $BASE/ui/navigation $BASE/presentation/navigation
 
-include(":app")
-include(":core:ui", ":core:utils")
-include(":data:local", ":data:remote", ":data:repository")
-include(":domain")
-include(":feature:events", ":feature:flyers", ":feature:settings", ":feature:map", ":feature:auth")
-EOF
+# Archivos de entrada
+mkdir -p $BASE/app
+git mv $BASE/MainActivity.kt $BASE/app/
+git mv $BASE/FlashMeetApp.kt $BASE/app/
 
-echo "✅ Archivos build.gradle.kts y settings.gradle.kts generados."
+# Temas
+git mv $BASE/ui/theme $BASE/presentation/common/theme
 
-echo "🎉 Proyecto reorganizado correctamente. Puedes abrir Android Studio y sincronizar Gradle."
+echo "✅ Estructura reorganizada con éxito."
